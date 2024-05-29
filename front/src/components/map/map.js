@@ -55,7 +55,9 @@ const MapComponent = () => {
         };
     }, []);
 
-    return <div ref={mapRef} className='map' />;
+    return (
+        <div ref={mapRef} className='map' />
+    )
 };
 
 export default MapComponent;
