@@ -5,13 +5,14 @@ import TileLayer from 'ol/layer/Tile';
 import { fromLonLat } from 'ol/proj';
 import OSM from 'ol/source/OSM';
 import TileWMS from 'ol/source/TileWMS';
+import { defaults as defaultControls } from 'ol/control';
+import { createLegendControl } from './createLegend';
 import './index.css'
 
 const MapComponent = () => {
     const mapRef = useRef(null);
 
     useEffect(() => {
-        console.log(process.env.REACT_APP_SAFE_URL)
         const param = {
             name: '범죄주의구간(전체)',
             serverUrl: `${process.env.REACT_APP_SAFE_URL}?apikey=${process.env.REACT_APP_SAFE_API_KEY}`,
@@ -47,7 +48,8 @@ const MapComponent = () => {
                 zoom: 17, // 초기 줌 레벨을 더 높임
                 minZoom: 10, // 최소 줌 레벨 설정
                 maxZoom: 18  // 최대 줌 레벨 설정
-            })
+            }),
+            controls: defaultControls().extend([createLegendControl()])
         });
 
         return () => {

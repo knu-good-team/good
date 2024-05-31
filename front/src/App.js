@@ -7,6 +7,7 @@ import NavigationBar from './components/nav/Navigation';
 import Search from './components/search/Search';
 import Statistics from './components/statistics/statistics';
 
+
 function App() {
 
   return (

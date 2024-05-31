@@ -1,12 +1,12 @@
 import React from 'react'
 import './index.css'
 
-const NavigationBar = () => {
+const Work = () => {
     return (
         <div>
-            장애인 일자리
+            <h1>Work</h1>
         </div>
     )
 }
 
-export default NavigationBar;
+export default Work
