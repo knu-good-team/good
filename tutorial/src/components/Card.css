@@ -43,6 +43,7 @@
     font-size: 14px;
     color: #777;
     height: 100px;
+    overflow-y: auto;
   }
   
   .card-action {
