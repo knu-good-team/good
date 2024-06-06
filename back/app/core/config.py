@@ -9,7 +9,7 @@ load_dotenv()
 
 class Settings:
     API_V1_STR: str = "/v1"
-    PROJECT_NAME: str = "capstone"
+    PROJECT_NAME: str = "good"
     ALLOW_ORIGINS: list[str] = [
         "*",  # TODO 나중에 쓰는 서버 ip로 바꿀 것
         # 'http://127.0.0.1:3000',
@@ -18,12 +18,10 @@ class Settings:
     ROOT_PATH = "/dev"
     ROOT_PRODUCT_PATH = "/product"
 
-    # HOST = os.environ["AWS_RDS_ENDPOINT"]
-    # PW = os.environ["AWS_RDS_PW"]
-    # USER = os.environ["AWS_RDS_USER"]
-    # DB_NAME = os.environ["AWS_RDS_DB"]
-    # GPT_API_KEY = os.environ["OPENAI_API_KEY_CTT"]
-    # GPT_CLIENT = OpenAI(api_key=GPT_API_KEY)
+    HOST = os.environ["LOCAL_ENDPOINT"]
+    PW = os.environ["LOCAL_PW"]
+    USER = os.environ["LOCAL_USER"]
+    DB_NAME = os.environ["LOCAL_DB_NAME"]
 
 
 @lru_cache()
