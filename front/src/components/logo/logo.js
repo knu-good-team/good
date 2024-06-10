@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
-import './index.css'
 
+import React from 'react'
+import './index.css'
 
 const Logo = () => {
     return (
-        <>
-            <div className="logo">
-            </div>
-        </>
+        <div className="logo">
+            logo
+        </div>
     )
 }
 
