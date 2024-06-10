@@ -5,6 +5,7 @@ import TileLayer from 'ol/layer/Tile';
 import { fromLonLat } from 'ol/proj';
 import OSM from 'ol/source/OSM';
 import TileWMS from 'ol/source/TileWMS';
+
 import { defaults as defaultControls } from 'ol/control';
 import { createLegendControl } from './createLegend';
 import './index.css'

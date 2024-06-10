@@ -2,6 +2,7 @@ import './App.css';
 import React from 'react';
 import MapComponent from './components/map/map';
 import Logo from './components/logo/logo';
+
 import MainVisual from './components/mainVisual/MainVisual';
 import NavigationBar from './components/nav/Navigation';
 import Search from './components/search/Search';
