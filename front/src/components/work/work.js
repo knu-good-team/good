@@ -24,7 +24,7 @@ const JobList = ({ jobs }) => {
                         <td>{job.고용형태}</td>
                         <td>{job.임금}</td>
                         <td>{job.임금형태}</td>
-                        <td>{job['사업장 주소']}</td>
+                        <td>{job.사업장주소}</td>
                         <td>{job.연락처}</td>
                     </tr>
                 ))}
@@ -43,7 +43,7 @@ JobList.propTypes = {
             등록일: PropTypes.string.isRequired,
             모집기간: PropTypes.string.isRequired,
             모집직종: PropTypes.string.isRequired,
-            '사업장 주소': PropTypes.string.isRequired,
+            사업장주소: PropTypes.string.isRequired,
             사업장명: PropTypes.string.isRequired,
             연락처: PropTypes.string.isRequired,
             연번: PropTypes.number.isRequired,

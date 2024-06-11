@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import 'ol/ol.css';
 import { Map, View } from 'ol';
 import TileLayer from 'ol/layer/Tile';
@@ -10,8 +10,33 @@ import { defaults as defaultControls } from 'ol/control';
 import { createLegendControl } from './createLegend';
 import './index.css'
 
+
 const MapComponent = () => {
     const mapRef = useRef(null);
+    const [latitude, setLatitude] = useState(126.9783882);
+    const [longitude, setLongitude] = useState(37.5666103);
+    const [error, setError] = useState(null);
+    const [map, setMap] = useState(null);
+
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_DEV_URL}/gps`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('response is not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (!data || data.length === 0) {
+                    throw new Error('No data available');
+                }
+                setLatitude(data.latitude);
+                setLongitude(data.longitude);
+            })
+            .catch(error => {
+                setError(error.message);
+            })
+    })
 
     useEffect(() => {
         const param = {
@@ -36,7 +61,7 @@ const MapComponent = () => {
             })
         });
 
-        const map = new Map({
+        const initialMap = new Map({
             target: mapRef.current,
             layers: [
                 new TileLayer({
@@ -45,7 +70,7 @@ const MapComponent = () => {
                 wmsLayer
             ],
             view: new View({
-                center: fromLonLat([127.14701459306, 36.836484242852]), // 서울의 경도 및 위도
+                center: fromLonLat([longitude, latitude]), // 서울의 경도 및 위도
                 zoom: 17, // 초기 줌 레벨을 더 높임
                 minZoom: 10, // 최소 줌 레벨 설정
                 maxZoom: 18  // 최대 줌 레벨 설정
@@ -53,10 +78,20 @@ const MapComponent = () => {
             controls: defaultControls().extend([createLegendControl()])
         });
 
+        setMap(initialMap);
+
         return () => {
-            map.setTarget(null);
+            if (initialMap) {
+                initialMap.setTarget(null);
+            }
         };
     }, []);
+
+    useEffect(() => {
+        if (map) {
+            map.getView().setCenter(fromLonLat([longitude, latitude]));
+        }
+    }, [latitude, longitude, map]);
 
     return (
         <div ref={mapRef} className='map' />
