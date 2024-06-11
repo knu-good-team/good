@@ -60,12 +60,24 @@ JobList.propTypes = {
 
 const Work = () => {
     const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_DEV_URL}/disability_jobs`)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
-                setData(data.data);
+                if (!data|| data.length === 0) {
+                    throw new Error('No data available');
+                }
+                setData(data);
+            })
+            .catch(error => {
+                setError(error.message);
             });
     }, []);
 

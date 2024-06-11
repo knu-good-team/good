@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, List
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
@@ -20,6 +20,6 @@ router = APIRouter()
 async def disability_jobs(
     service: DisabilityJobsService = Depends(get_disability_jobs_service),
     db: Session = Depends(get_db),
-) -> DisabilityJobs:
+) -> List[DisabilityJobs]:
     result = await service.get_disability_jobs_list(db)
     return result
