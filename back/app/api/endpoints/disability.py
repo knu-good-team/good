@@ -34,6 +34,6 @@ async def disability_jobs(
 async def disability_workers(
     service: DisabilityService = Depends(get_disability_service),
     db: Session = Depends(get_db),
-) -> Any:  # List[DisabilityWorkers]:
+) -> List[DisabilityWorkers]:
     result = await service.get_disability_workers_list(db)
     return result

@@ -24,3 +24,10 @@ class DisabilityJobs(BaseModel):
 
 class DisabilityWorkers(BaseModel):
     연번: int = 1
+    연령대: str | None = ""
+    희망지역: str | None = ""
+    희망직종: str | None = ""
+    희망임금: str | None = ""
+    장애유형: str | None = ""
+    중증여부: str | None = ""
+    기관여부: str | None = ""

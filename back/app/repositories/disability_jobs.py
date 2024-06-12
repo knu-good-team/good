@@ -22,12 +22,11 @@ class DisailityRepository:
             db.close()
 
     async def get_disability_workers_list(db: Session) -> List:
-        return {"message": "get_disability_workers_list"}
-        # try:
-        #     return db.query(DisabilityWorkersModel).all()[:2]
-        # except OperationalError as e:
-        #     raise HTTPException(status_code=500, detail=str(e))
-        # except Exception as e:
-        #     raise HTTPException(status_code=500, detail=str(e))
-        # finally:
-        #     db.close()
+        try:
+            return db.query(DisabilityWorkersModel).all()[:2]
+        except OperationalError as e:
+            raise HTTPException(status_code=500, detail=str(e))
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+        finally:
+            db.close()
