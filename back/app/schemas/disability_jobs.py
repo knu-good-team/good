@@ -21,3 +21,6 @@ class DisabilityJobs(BaseModel):
     담당기관: str | None = ""
     등록일: str | None = ""
     연락처: str | None = ""
+
+class DisabilityWorkers(BaseModel):
+    연번: int = 1

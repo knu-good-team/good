@@ -1,9 +1,9 @@
 from app.db.database import SessionLocal
-from app.repositories.disability_jobs import DisailityJobsRepository
-from app.services.disability_jobs import DisabilityJobsService
+from app.repositories.disability_jobs import DisailityRepository
+from app.services.disability import DisabilityService
 
-def get_disability_jobs_service() -> DisabilityJobsService:
-    return DisabilityJobsService(disability_jobs_repo=DisailityJobsRepository)
+def get_disability_service() -> DisabilityService:
+    return DisabilityService(disability_repo=DisailityRepository)
 
 def get_db():
     db = SessionLocal()
