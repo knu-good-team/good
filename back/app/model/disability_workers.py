@@ -15,3 +15,8 @@ class DisabilityWorkersModel(Base):
     장애유형 = Column(TEXT, nullable=True, default=null)
     중증여부 = Column(TEXT, nullable=True, default=null)
     기관분류 = Column(TEXT, nullable=True, default=null)
+
+    def to_dict(self):
+        return {
+            column.name: getattr(self, column.name) for column in self.__table__.columns
+        }

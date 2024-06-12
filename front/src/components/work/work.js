@@ -63,7 +63,7 @@ const Work = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_DEV_URL}/disability_jobs`)
+        fetch(`${process.env.REACT_APP_DEV_URL}/disability/jobs`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
