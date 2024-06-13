@@ -4,32 +4,34 @@ import './index.css';
 
 const JobList = ({ jobs }) => {
     return (
-        <table className="job-table">
-            <thead>
-                <tr>
-                    <th>사업장명</th>
-                    <th>모집직종</th>
-                    <th>고용형태</th>
-                    <th>임금</th>
-                    <th>임금형태</th>
-                    <th>주소</th>
-                    <th>연락처</th>
-                </tr>
-            </thead>
-            <tbody>
-                {jobs.map(job => (
-                    <tr key={job.연번}>
-                        <td>{job.사업장명}</td>
-                        <td>{job.모집직종}</td>
-                        <td>{job.고용형태}</td>
-                        <td>{job.임금}</td>
-                        <td>{job.임금형태}</td>
-                        <td>{job.사업장주소}</td>
-                        <td>{job.연락처}</td>
+        <div className="table-container">
+            <table className="job-table">
+                <thead>
+                    <tr>
+                        <th>사업장명</th>
+                        <th>모집직종</th>
+                        <th>고용형태</th>
+                        <th>임금</th>
+                        <th>임금형태</th>
+                        <th>주소</th>
+                        <th>연락처</th>
                     </tr>
-                ))}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {jobs.map(job => (
+                        <tr key={job.연번}>
+                            <td>{job.사업장명}</td>
+                            <td>{job.모집직종}</td>
+                            <td>{job.고용형태}</td>
+                            <td>{job.임금}</td>
+                            <td>{job.임금형태}</td>
+                            <td>{job.사업장주소}</td>
+                            <td>{job.연락처}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 };
 
@@ -71,7 +73,7 @@ const Work = () => {
                 return response.json();
             })
             .then(data => {
-                if (!data|| data.length === 0) {
+                if (!data || data.length === 0) {
                     throw new Error('No data available');
                 }
                 setData(data);
@@ -83,7 +85,7 @@ const Work = () => {
 
     return (
         <div className="container">
-            <h1>Work</h1>
+            <h1>장애인 구인 정보</h1>
             {data ? <JobList jobs={data} /> : <p>Loading...</p>}
         </div>
     );

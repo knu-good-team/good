@@ -5,7 +5,6 @@
   flex-flow: column;
   overflow: auto;
   overflow-y: auto;
-  text-align: center;
   margin: 20px;
 }
 
