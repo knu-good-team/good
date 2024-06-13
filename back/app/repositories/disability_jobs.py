@@ -14,7 +14,7 @@ class DisailityRepository:
 
     async def get_disability_jobs_list(db: Session) -> List:
         try:
-            return db.query(DisabilityJobsModel).all()[:2]
+            return db.query(DisabilityJobsModel).all()[:10]
         except OperationalError as e:
             raise HTTPException(status_code=500, detail=str(e))
         except Exception as e:
