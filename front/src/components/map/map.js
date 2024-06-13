@@ -71,7 +71,7 @@ const MapComponent = () => {
             ],
             view: new View({
                 center: fromLonLat([longitude, latitude]), // 서울의 경도 및 위도
-                zoom: 17, // 초기 줌 레벨을 더 높임
+                zoom: 16, // 초기 줌 레벨을 더 높임
                 minZoom: 10, // 최소 줌 레벨 설정
                 maxZoom: 18  // 최대 줌 레벨 설정
             }),

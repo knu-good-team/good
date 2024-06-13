@@ -1,8 +1,12 @@
 .App {
   display: flex;
-  text-align: center;
+  min-height: 100%;
+  flex-direction: column;
   flex-flow: column;
-  margin: 30px;
+  overflow: auto;
+  overflow-y: auto;
+  text-align: center;
+  margin: 20px;
 }
 
 .header {
