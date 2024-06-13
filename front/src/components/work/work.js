@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './index.css';
+import Search from '../search/Search';
 
 const JobList = ({ jobs }) => {
     return (
@@ -85,7 +86,10 @@ const Work = () => {
 
     return (
         <div className="container">
-            <h1>장애인 구인 정보</h1>
+            <div style={{ "display": "flex", "justify-content": "space-between", "align-items": "center" }}>
+                <h1>장애인 구인 정보</h1>
+                <Search />
+            </div>
             {data ? <JobList jobs={data} /> : <p>Loading...</p>}
         </div>
     );
