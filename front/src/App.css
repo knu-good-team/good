@@ -1,13 +1,13 @@
 .App {
   display: flex;
-  text-align: center;
-  flex-flow: column;
-  margin: 30px;
+  min-height: 100%;
+  flex-direction: column;
+  margin: 20px;
 }
 
 .header {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
