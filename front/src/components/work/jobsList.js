@@ -1,6 +1,10 @@
 import { PropTypes } from 'prop-types';
 
-const JobList = ({ jobs }) => {
+const JobList = ({ jobs = null }) => {
+    if (!jobs || jobs.length === 0) {
+        return <p>No jobs available.</p>;
+    }
+
     return (
         <div className="table-container">
             <table className="job-table">

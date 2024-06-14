@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import './index.css'
 
-const Search = ({ onSearch }) => {
+const Search = ({ onSearch = null }) => {
     const [query, setQuery] = useState('');
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
 
 
     const handleSearch = () => {
-       onSearch(query); 
+        onSearch(query);
     };
 
     return (

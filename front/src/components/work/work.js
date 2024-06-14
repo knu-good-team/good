@@ -50,7 +50,14 @@ const Work = () => {
                 <h1>장애인 구인 정보</h1>
                 <Search onSearch={fetchData} />
             </div>
-            {data ? <JobList jobs={data} /> : <p>Loading...</p>}
+            {loading ? (
+                <p>Loading...</p>
+            ) : error ? (
+                <p>{error}</p>
+            ) : (
+                <JobList jobs={data} />
+            )}
+            {/* {data ? <JobList jobs={data} /> : <p>Loading...</p>} */}
         </div>
     );
 };
