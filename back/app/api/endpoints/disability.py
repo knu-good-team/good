@@ -26,6 +26,21 @@ async def disability_jobs(
 
 
 @router.get(
+    path="/search",
+    summary="",
+    description="",
+    response_description="",
+)
+async def search_disability_jobs(
+    search: str,
+    service: DisabilityService = Depends(get_disability_service),
+    db: Session = Depends(get_db),
+) -> List[DisabilityJobs]:
+    result = await service.search_disability_jobs(db, search)
+    return result
+
+
+@router.get(
     path="/workers",
     summary="",
     description="",

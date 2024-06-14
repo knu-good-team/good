@@ -14,6 +14,9 @@ class DisabilityService:
     async def get_disability_jobs_list(self, db: Session) -> Any:
         return await self.disability_repo.get_disability_jobs_list(db)
 
+    async def search_disability_jobs(self, db: Session, search: str) -> Any:
+        return await self.disability_repo.search_disability_jobs(db, search)
+
     async def get_disability_workers_list(self, db: Session) -> Any:
         resp = await self.disability_repo.get_disability_workers_list(db)
         resp_list = [resp.to_dict() for resp in resp]
