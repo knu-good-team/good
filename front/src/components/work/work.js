@@ -1,69 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import './index.css';
 import Search from '../search/Search';
+import JobList from './jobsList';
 
-const JobList = ({ jobs }) => {
-    return (
-        <div className="table-container">
-            <table className="job-table">
-                <thead>
-                    <tr>
-                        <th>사업장명</th>
-                        <th>모집직종</th>
-                        <th>고용형태</th>
-                        <th>임금</th>
-                        <th>임금형태</th>
-                        <th>주소</th>
-                        <th>연락처</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {jobs.map(job => (
-                        <tr key={job.연번}>
-                            <td>{job.사업장명}</td>
-                            <td>{job.모집직종}</td>
-                            <td>{job.고용형태}</td>
-                            <td>{job.임금}</td>
-                            <td>{job.임금형태}</td>
-                            <td>{job.사업장주소}</td>
-                            <td>{job.연락처}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    );
-};
-
-JobList.propTypes = {
-    jobs: PropTypes.arrayOf(
-        PropTypes.shape({
-            고용형태: PropTypes.string.isRequired,
-            구인신청일자: PropTypes.string.isRequired,
-            기업형태: PropTypes.string.isRequired,
-            담당기관: PropTypes.string.isRequired,
-            등록일: PropTypes.string.isRequired,
-            모집기간: PropTypes.string.isRequired,
-            모집직종: PropTypes.string.isRequired,
-            사업장주소: PropTypes.string.isRequired,
-            사업장명: PropTypes.string.isRequired,
-            연락처: PropTypes.string.isRequired,
-            연번: PropTypes.number.isRequired,
-            요구경력: PropTypes.string.isRequired,
-            요구자격증: PropTypes.string,
-            요구학력: PropTypes.string.isRequired,
-            임금: PropTypes.number.isRequired,
-            임금형태: PropTypes.string.isRequired,
-            입사형태: PropTypes.string.isRequired,
-            전공계열: PropTypes.string
-        })
-    ).isRequired
-};
 
 const Work = () => {
     const [data, setData] = useState(null);
+    const [dataCount, setDataCount] = useState(0);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_DEV_URL}/disability/jobs`)
@@ -73,24 +18,49 @@ const Work = () => {
                 }
                 return response.json();
             })
-            .then(data => {
-                if (!data || data.length === 0) {
+            .then(result => {
+                if (!result || result.data.length === 0) {
                     throw new Error('No data available');
                 }
-                setData(data);
+                setData(result.data);
+                setDataCount(result.total);
             })
             .catch(error => {
                 setError(error.message);
             });
     }, []);
 
+    const fetchData = async (query) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await fetch(`${process.env.REACT_APP_DEV_URL}/disability/search?search=${query}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const result = await response.json();
+            setData(result.data);
+            setDataCount(result.total);
+        } catch (error) {
+            setError(error.message);
+        }
+        setLoading(false);
+    };
+
     return (
         <div className="container">
-            <div style={{ "display": "flex", "justify-content": "space-between", "align-items": "center" }}>
-                <h1>장애인 구인 정보</h1>
-                <Search />
+            <div className="text-container" style={{  }}>
+                <div className="work-text">장애인 구인 정보</div>
+                {dataCount > 0 ? <div className="work-count">{dataCount}개의 데이터가 검색되었습니다.</div> : null}
+                {/* <Search onSearch={fetchData} /> */}
             </div>
-            {data ? <JobList jobs={data} /> : <p>Loading...</p>}
+            {loading ? (
+                <p>Loading...</p>
+            ) : error ? (
+                <p>{error}</p>
+            ) : (
+                <JobList jobs={data} />
+            )}
         </div>
     );
 };

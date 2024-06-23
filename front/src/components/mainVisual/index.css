@@ -1,4 +1,37 @@
 .main-container {
   display: flex;
-  height: 500px;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 30px;
+  /* height: 500px; */
+}
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 125px;
+  margin-bottom: 125px;
+}
+
+.search-text {
+  font-weight: 500;
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+.search-strength {
+  font-weight: bold;
+  position: relative;
+  color: var(--primary-color);
+}
+
+.check-mark {
+  content: "";
+  background-image: url("../../assets/check.svg");
+  background-size: cover;
+  width: 25px;
+  height: 20px;
+  position: absolute;
+  top: -15px;
+  right: 35px;
 }

@@ -1,0 +1,10 @@
+.banner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1140px;
+    height: 330px;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+}

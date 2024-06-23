@@ -25,3 +25,8 @@ class DisabilityJobsModel(Base):
     담당기관 = Column(TEXT, nullable=True, default=null)
     등록일 = Column(TEXT, nullable=True, default=null)
     연락처 = Column(TEXT, nullable=True, default=null)
+
+    def to_dict(self):
+        return {
+            column.name: getattr(self, column.name) for column in self.__table__.columns
+        }

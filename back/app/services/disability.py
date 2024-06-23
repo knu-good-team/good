@@ -12,7 +12,14 @@ class DisabilityService:
         self.disability_repo = disability_repo
 
     async def get_disability_jobs_list(self, db: Session) -> Any:
-        return await self.disability_repo.get_disability_jobs_list(db)
+        resp = await self.disability_repo.get_disability_jobs_list(db)
+        resp_list = [resp.to_dict() for resp in resp]
+        return resp_list
+
+    async def search_disability_jobs(self, db: Session, search: str) -> Any:
+        resp = await self.disability_repo.search_disability_jobs(db, search)
+        resp_list = [resp.to_dict() for resp in resp]
+        return resp_list
 
     async def get_disability_workers_list(self, db: Session) -> Any:
         resp = await self.disability_repo.get_disability_workers_list(db)
@@ -24,13 +31,13 @@ class DisabilityService:
         for entry in resp_list:
             age_group = entry["연령대"]
             job = entry["희망직종"]
-            
+
             if age_group not in age_group_job_counts:
                 age_group_job_counts[age_group] = {}
-            
+
             if job not in age_group_job_counts[age_group]:
                 age_group_job_counts[age_group][job] = 0
-            
+
             age_group_job_counts[age_group][job] += 1
 
         # 희망직종이 50 이하인 경우 기타로 통합

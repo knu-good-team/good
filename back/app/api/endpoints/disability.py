@@ -20,9 +20,30 @@ router = APIRouter()
 async def disability_jobs(
     service: DisabilityService = Depends(get_disability_service),
     db: Session = Depends(get_db),
-) -> List[DisabilityJobs]:
+) -> dict[str, Any]:
     result = await service.get_disability_jobs_list(db)
-    return result
+    return {
+        "data": result,
+        "total": len(result),
+    }
+
+
+@router.get(
+    path="/search",
+    summary="",
+    description="",
+    response_description="",
+)
+async def search_disability_jobs(
+    search: str,
+    service: DisabilityService = Depends(get_disability_service),
+    db: Session = Depends(get_db),
+) -> dict[str, Any]:
+    result = await service.search_disability_jobs(db, search)
+    return {
+        "data": result,
+        "total": len(result),
+    }
 
 
 @router.get(
