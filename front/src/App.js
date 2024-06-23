@@ -4,7 +4,6 @@ import MapComponent from './components/map/map';
 import Logo from './components/logo/logo';
 
 import MainVisual from './components/mainVisual/MainVisual';
-// import NavigationBar from './components/nav/Navigation';
 import Statistics from './components/statistics/statistics';
 
 

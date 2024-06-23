@@ -44,7 +44,7 @@ class DisabilityService:
         for age_group in age_group_job_counts:
             temp_counts = {}
             for job, count in age_group_job_counts[age_group].items():
-                if count <= 10:
+                if count <= 50:
                     if "기타" not in temp_counts:
                         temp_counts["기타"] = 0
                     temp_counts["기타"] += count

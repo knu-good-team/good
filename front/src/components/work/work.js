@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './index.css';
 import Search from '../search/Search';
 import JobList from './jobsList';
-import { defaultsasdefaultControls } from 'ol/control';
 
 
 const Work = () => {
@@ -50,12 +49,10 @@ const Work = () => {
 
     return (
         <div className="container">
-            <div style={{ "display": "flex", "justify-content": "space-between", "align-items": "center" }}>
-                <h1>장애인 구인 정보</h1>
-                <Search onSearch={fetchData} />
-            </div>
-            <div>
-                {dataCount > 0 ? <div>{dataCount}개의 데이터가 검색되었습니다.</div> : null}
+            <div className="text-container" style={{  }}>
+                <div className="work-text">장애인 구인 정보</div>
+                {dataCount > 0 ? <div className="work-count">{dataCount}개의 데이터가 검색되었습니다.</div> : null}
+                {/* <Search onSearch={fetchData} /> */}
             </div>
             {loading ? (
                 <p>Loading...</p>
@@ -64,7 +61,6 @@ const Work = () => {
             ) : (
                 <JobList jobs={data} />
             )}
-            {/* {data ? <JobList jobs={data} /> : <p>Loading...</p>} */}
         </div>
     );
 };
