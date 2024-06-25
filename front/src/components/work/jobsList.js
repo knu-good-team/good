@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types';
 
-const JobList = ({ jobs = null }) => {
+const JobList = ({ jobs = [] }) => {
     if (!jobs || jobs.length === 0) {
         return <p>No jobs available.</p>;
     }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import './index.css'
-import { width } from '@mui/system';
 
 const truncate = (str, n) => {
     return (str.length > n) ? str.substr(0, n - 4) + '...' : str;
@@ -59,7 +58,6 @@ const Statistics = () => {
                                 />
                                 <YAxis />
                                 <Tooltip />
-                                {/* <Legend /> */}
                                 <Bar dataKey="count" fill="#468AE9" />
                             </BarChart>
                         </ResponsiveContainer>

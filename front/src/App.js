@@ -17,9 +17,9 @@ function App() {
         {/* <NavigationBar /> */}
       </header>
 
-      <container>
+      <div>
         <MainVisual />
-      </container>
+      </div>
 
       <footer className="footer">
         <MapComponent />
