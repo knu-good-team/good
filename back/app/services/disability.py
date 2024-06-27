@@ -1,6 +1,5 @@
 from collections import defaultdict
 from typing import Any, List
-import aiohttp
 from sqlalchemy.orm import Session
 
 from app.core.config import get_settings

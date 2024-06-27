@@ -1,0 +1,76 @@
+/* Modal styles */
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  display: flex;
+  flex-direction: column;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 20px;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+}
+
+.modal-column {
+  flex: 1;
+  min-width: 200px; /* Adjust as needed */
+}
+
+.modal-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+.modal-row span:first-child {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.modal-column:last-child {
+  border-right: none;
+}
+
+.recruitment {
+  background-color: var(--primary-color);
+  padding: 0 20px;
+}
+
+.info-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+  height: 30vh;
+}
