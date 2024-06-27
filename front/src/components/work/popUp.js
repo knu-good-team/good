@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Statistics from '../statistics/statistics';
 import MapComponent from '../map/map';
 import './popUp.css';
@@ -6,14 +6,36 @@ import './popUp.css';
 const { kakao } = window;
 
 const PopUp = ({ selectedJob, closeModal }) => {
+    const [coordinate, setCoordinate] = useState([0, 0]); // [경도 log, 위도 lat]
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_DEV_URL}/gps?address=${selectedJob.사업장주소}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('response is not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (!data || data.length === 0) {
+                    throw new Error('No data available');
+                }
+                setCoordinate([data.longitude, data.latitude]);
+            })
+            .catch(error => {
+                setError(error.message);
+            })
+    }, [selectedJob.사업장주소])
+
     useEffect(() => {
         const container = document.getElementById('map');
         const options = {
-            center: new kakao.maps.LatLng(33.450701, 126.570667),
+            center: new kakao.maps.LatLng(coordinate[1], coordinate[0]),
             level: 3
         }
         const map = new kakao.maps.Map(container, options);
-    }, [])
+    }, [coordinate])
 
     return (
         <div div className="modal" >
@@ -79,10 +101,10 @@ const PopUp = ({ selectedJob, closeModal }) => {
                     <p>모집기간 {selectedJob.모집기간}</p>
                 </div>
                 <div className="convenience-container">
-                    <div id="map" style={{ marginTop: "20px", width: "1200px", height: "400px" }}></div>
+                    <div id="map" className="kakao-map"></div>
                 </div>
                 <div className="info-container">
-                    <MapComponent address={selectedJob.사업장주소} />
+                    <MapComponent address={selectedJob.사업장주소} coordinate={coordinate} />
                     <Statistics />
                 </div>
             </div>

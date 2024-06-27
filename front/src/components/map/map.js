@@ -11,30 +11,10 @@ import { createLegendControl } from './createLegend';
 import './index.css'
 
 
-const MapComponent = ({ address = "" }) => {
+const MapComponent = ({ address = "", coordinate = [0, 0] }) => {
     const mapRef = useRef(null);
-    const [coordinate, setCoordinate] = useState([0, 0]); // [경도 log, 위도 lat]
     const [error, setError] = useState(null);
     const [map, setMap] = useState(null);
-
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_DEV_URL}/gps?address=${address}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('response is not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (!data || data.length === 0) {
-                    throw new Error('No data available');
-                }
-                setCoordinate([data.longitude, data.latitude]);
-            })
-            .catch(error => {
-                setError(error.message);
-            })
-    }, [address])
 
     useEffect(() => {
         const param = {
@@ -83,7 +63,7 @@ const MapComponent = ({ address = "" }) => {
                 initialMap.setTarget(null);
             }
         };
-    }, []);
+    }, [coordinate]);
 
     useEffect(() => {
         if (map) {
