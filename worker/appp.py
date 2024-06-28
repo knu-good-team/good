@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends, Path, HTTPException
 from pydantic import BaseModel
-from database import engineconn
-from models import Test
+from database2 import engineconn
+from job_posting import Test
 
 app = FastAPI()
 
