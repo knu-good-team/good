@@ -53,12 +53,21 @@ const PopUp = ({ selectedJob, closeModal }) => {
         }
     };
 
+    const handleBackgroundClick = (event) => {
+        if (event.target.className === 'modal') {
+            closeModal();
+        }
+    };
+
     return (
-        <div div className="modal" >
+        <div div className="modal" onClick={handleBackgroundClick}>
             <div className="modal-content">
                 <span className="close" onClick={closeModal}>&times;</span>
                 <div className="company-info">
-                    <h2 style={{ marginLeft: "20px" }}>{selectedJob.사업장명}</h2>
+                    <div className="company">
+                        <div className="subtitle" style={{ color: "#0066FF" }}>{selectedJob.사업장명}</div>
+                        <div className="title" style={{ color: "#0066FF" }}>{selectedJob.모집직종}</div>
+                    </div>
                     <div className="modal-grid">
                         <div className="modal-column">
                             <h3>기업정보</h3>
@@ -82,11 +91,11 @@ const PopUp = ({ selectedJob, closeModal }) => {
                         <div className="modal-column">
                             <h3>지원정보/자격</h3>
                             <div className="modal-row">
-                                <span>요구경력</span>
+                                <span className="strength">요구경력</span>
                                 <span>{selectedJob.요구경력}</span>
                             </div>
                             <div className="modal-row">
-                                <span>요구학력</span>
+                                <span className="strength">요구학력</span>
                                 <span>{selectedJob.요구학력}</span>
                             </div>
                             <div className="modal-row">
@@ -97,7 +106,7 @@ const PopUp = ({ selectedJob, closeModal }) => {
                         <div className="modal-column">
                             <h3>근무조건</h3>
                             <div className="modal-row">
-                                <span>고용형태</span>
+                                <span className="strength">고용형태</span>
                                 <span>{selectedJob.고용형태}</span>
                             </div>
                             <div className="modal-row">
