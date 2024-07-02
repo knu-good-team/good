@@ -4,15 +4,15 @@ import { PropTypes } from 'prop-types';
 import PopUp from './popUp';
 
 const JobList = ({ jobs = [] }) => {
-    const [selectedJob, setSelectedJob] = useState(null)
+    const [selectedJob, setSelectedJob] = useState(null);
 
     const handleRowClick = (job) => {
-        setSelectedJob(job)
-    }
+        setSelectedJob(job);
+    };
 
     const closeModal = () => {
-        setSelectedJob(null)
-    }
+        setSelectedJob(null);
+    };
 
     if (!jobs || jobs.length === 0) {
         return <p>No jobs available.</p>;
@@ -23,6 +23,7 @@ const JobList = ({ jobs = [] }) => {
             <table className="job-table">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>사업장명</th>
                         <th>모집직종</th>
                         <th>고용형태</th>
@@ -33,8 +34,9 @@ const JobList = ({ jobs = [] }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {jobs.map(job => (
+                    {jobs.map((job, index) => (
                         <tr key={job.연번} onClick={() => handleRowClick(job)} className="job-row">
+                            <td style={{ color: '#0066ff' }}>{index + 1}</td>
                             <td>{job.사업장명}</td>
                             <td>{job.모집직종}</td>
                             <td>{job.고용형태}</td>
@@ -47,10 +49,9 @@ const JobList = ({ jobs = [] }) => {
                 </tbody>
             </table>
             {selectedJob && <PopUp selectedJob={selectedJob} closeModal={closeModal} />}
-        </div >
+        </div>
     );
 };
-
 
 JobList.propTypes = {
     jobs: PropTypes.arrayOf(
@@ -77,4 +78,4 @@ JobList.propTypes = {
     ).isRequired
 };
 
-export default JobList
+export default JobList;

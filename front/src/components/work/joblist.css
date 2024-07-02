@@ -1,23 +1,40 @@
+.table-container {
+  background-color: #ffffff;
+  overflow-y: hidden;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+}
+
 .job-table {
   width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  table-layout: auto;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  padding: 20px;
+}
+
+.job-table thead tr {
+  border-bottom: 2px solid #ddd;
 }
 
 .job-table th,
 .job-table td {
-  border: 1px solid #ddd;
   padding: 12px;
   text-align: center;
 }
 
 .job-table th {
-  background-color: #f2f2f2;
+  background-color: #ffffff;
   font-weight: bold;
 }
 
 .job-row:hover {
-  background-color: #f1f1f1;
   cursor: pointer;
+}
+
+.job-table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.job-table tbody tr td:first-child {
+  color: #0066ff;
 }
