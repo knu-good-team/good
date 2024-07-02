@@ -21,6 +21,10 @@
   flex-direction: column;
 }
 
+.company-info {
+  margin: 20px 40px;
+}
+
 .close {
   color: #aaa;
   float: right;
@@ -64,8 +68,26 @@
 }
 
 .recruitment {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   background-color: var(--primary-color);
-  padding: 0 20px;
+  padding: 0 60px;
+  height: 130px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 20px;
+  color: white;
+  margin-bottom: 20px;
 }
 
 .info-container {
@@ -77,14 +99,13 @@
 
 .kakao-map {
   width: 100%;
-  height: 600px; 
-  margin-top: 20px;
+  height: 600px;
 }
 
 .tab-container {
   display: flex;
   justify-content: flex-start;
-  margin-top: 20px;
+  margin: 20px 30px;
   /* border-bottom: 1px solid #ddd; */
 }
 
@@ -117,7 +138,6 @@
 }
 
 .tab-content {
-  margin-top: 20px;
   width: auto;
   height: 100%;
 }
