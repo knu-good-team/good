@@ -7,6 +7,7 @@ const { kakao } = window;
 
 const PopUp = ({ selectedJob, closeModal }) => {
     const [coordinate, setCoordinate] = useState([0, 0]); // [경도 log, 위도 lat]
+    const [activeTab, setActiveTab] = useState('facilities'); // ['facilities', 'safety', 'preferred'
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -29,13 +30,28 @@ const PopUp = ({ selectedJob, closeModal }) => {
     }, [selectedJob.사업장주소])
 
     useEffect(() => {
-        const container = document.getElementById('map');
-        const options = {
-            center: new kakao.maps.LatLng(coordinate[1], coordinate[0]),
-            level: 3
+        if (activeTab === 'facilities' && coordinate[0] !== 0 && coordinate[1] !== 0) {
+            const container = document.getElementById('map');
+            const options = {
+                center: new kakao.maps.LatLng(coordinate[1], coordinate[0]),
+                level: 3
+            };
+            new kakao.maps.Map(container, options);
         }
-        const map = new kakao.maps.Map(container, options);
-    }, [coordinate])
+    }, [activeTab, coordinate])
+
+    const renderContent = () => {
+        switch (activeTab) {
+            case 'facilities':
+                return <div id="map" className="kakao-map"></div>;
+            case 'safety':
+                return <MapComponent address={selectedJob.사업장주소} coordinate={coordinate} />;
+            case 'preferred':
+                return <Statistics />;
+            default:
+                return null;
+        }
+    };
 
     return (
         <div div className="modal" >
@@ -100,12 +116,21 @@ const PopUp = ({ selectedJob, closeModal }) => {
                 <div className="recruitment">
                     <p>모집기간 {selectedJob.모집기간}</p>
                 </div>
-                <div className="convenience-container">
-                    <div id="map" className="kakao-map"></div>
+                <div className="tab-container">
+                    <button className={`tab-button ${activeTab === 'facilities' ? 'active' : ''}`} onClick={() => setActiveTab('facilities')}>
+                        주변 편의시설
+                    </button>
+                    <div className="divider" />
+                    <button className={`tab-button ${activeTab === 'safety' ? 'active' : ''}`} onClick={() => setActiveTab('safety')}>
+                        안전등급
+                    </button>
+                    <div className="divider" />
+                    <button className={`tab-button ${activeTab === 'preferred' ? 'active' : ''}`} onClick={() => setActiveTab('preferred')}>
+                        선호 직군
+                    </button>
                 </div>
-                <div className="info-container">
-                    <MapComponent address={selectedJob.사업장주소} coordinate={coordinate} />
-                    <Statistics />
+                <div className="tab-content">
+                    {renderContent()}
                 </div>
             </div>
         </div>
