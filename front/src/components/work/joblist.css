@@ -29,6 +29,7 @@
 
 .job-row:hover {
   cursor: pointer;
+  background-color: #D9D9D9;
 }
 
 .job-table tbody tr {
