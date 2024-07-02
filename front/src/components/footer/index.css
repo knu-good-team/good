@@ -1,0 +1,13 @@
+.footer-container {
+    color: #D9D9D9;
+}
+
+.footer-info {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+
+.info {
+    margin: 0 20px;
+}

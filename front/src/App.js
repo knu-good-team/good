@@ -3,6 +3,7 @@ import React from 'react';
 import Logo from './components/logo/logo';
 
 import MainVisual from './components/mainVisual/MainVisual';
+import Footer from './components/footer/footer';
 
 
 function App() {
@@ -20,8 +21,8 @@ function App() {
       </div>
 
       <footer className="footer">
-        {/* <MapComponent />
-        <Statistics /> */}
+        <Footer />
+        <Logo />
       </footer>
 
     </div>
