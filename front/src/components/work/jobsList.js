@@ -14,7 +14,7 @@ const JobList = ({ jobs = [] }) => {
         setSelectedJob(null);
     };
 
-    if (!jobs || jobs.length === 0) {
+    if (jobs.length === 0) {
         return <p>No jobs available.</p>;
     }
 
@@ -35,7 +35,7 @@ const JobList = ({ jobs = [] }) => {
                 </thead>
                 <tbody>
                     {jobs.map((job, index) => (
-                        <tr key={job.연번} onClick={() => handleRowClick(job)} className="job-row">
+                        <tr key={index} onClick={() => handleRowClick(job)} className="job-row">
                             <td style={{ color: '#0066ff' }}>{index + 1}</td>
                             <td>{job.busplaName}</td>
                             <td>{job.jobNm}</td>

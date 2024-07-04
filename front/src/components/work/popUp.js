@@ -126,7 +126,7 @@ const PopUp = ({ selectedJob, closeModal }) => {
                 </div>
                 <div className="recruitment">
                     <div className="period subtitle">모집기간</div>
-                    <p className="period title">{selectedJob.termDate}</p>
+                    <p className="period title">{selectedJob.termDate.start_date}~{selectedJob.termDate.end_date}</p>
                 </div>
                 <div className="tab-container">
                     <button className={`tab-button ${activeTab === 'facilities' ? 'active' : ''}`} onClick={() => setActiveTab('facilities')}>

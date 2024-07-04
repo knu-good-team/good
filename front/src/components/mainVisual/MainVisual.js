@@ -7,8 +7,12 @@ import Search from '../search/Search';
 const MainVisual = () => {
     const [data, setData] = useState([]);
     const [dataCount, setDataCount] = useState(0);
-    const [error, setError] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(10);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchText, setSearchText] = useState('');
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_DEV_URL}/disability/job_list`)
@@ -30,21 +34,18 @@ const MainVisual = () => {
             });
     }, []);
 
-    const fetchData = async (query) => {
-        setLoading(true);
-        setError(null);
-        try {
-            const response = await fetch(`${process.env.REACT_APP_DEV_URL}/disability/search?search=${query}`);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const result = await response.json();
-            setData(result.data);
-            setDataCount(result.total);
-        } catch (error) {
-            setError(error.message);
-        }
-        setLoading(false);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const filteredData = data.filter(job =>
+        job.compAddr && job.compAddr.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    const currentData = filteredData.slice(indexOfFirstItem, indexOfFirstItem + itemsPerPage);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    const handleSearch = () => {
+        setSearchQuery(searchText);
+        setCurrentPage(1);
     };
 
     return (
@@ -52,7 +53,11 @@ const MainVisual = () => {
             <Banner />
             <div className="search-container">
                 <span className="search-text">취업 좋은 곳은 <span className="search-strength">좋은데<span className="check-mark"></span></span>에서!</span>
-                <Search onSearch={fetchData} />
+                <Search
+                    setSearchText={setSearchText}
+                    handleSearch={handleSearch}
+                    searchText={searchText}
+                />
             </div>
             {loading ? (
                 <p>Loading...</p>
@@ -60,11 +65,11 @@ const MainVisual = () => {
                 <p>{error}</p>
             ) : (
                 <div>
-                    <Work data={data} dataCount={dataCount} />
+                    <Work data={currentData} dataCount={filteredData.length} paginate={paginate} itemsPerPage={itemsPerPage} currentPage={currentPage} />
                 </div>
             )}
         </div>
-    )
+    );
 }
 
 export default MainVisual;

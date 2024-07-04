@@ -1,25 +1,20 @@
-import React, { useState } from 'react'
-import './index.css'
+import React from 'react';
+import './index.css';
+import magnifierIcon from '../../assets/magnifier.svg';
 
-import magnifierIcon from '../../assets/magnifier.svg'
+const Search = ({ setSearchText, handleSearch, searchText }) => {
 
-const Search = ({ onSearch = null }) => {
-    const [query, setQuery] = useState('');
-    const [data, setData] = useState([]);
-    const [error, setError] = useState(null);
-
-
-    const handleSearch = () => {
-        onSearch(query);
+    const handleSearchChange = (e) => {
+        setSearchText(e.target.value);
     };
 
     return (
         <div className="search-bar">
             <input
                 type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="통합 검색"
+                placeholder="사업장 주소로 검색"
+                value={searchText}
+                onChange={handleSearchChange}
                 className="search-input"
             />
             <button onClick={handleSearch} className="search-button">
@@ -27,6 +22,6 @@ const Search = ({ onSearch = null }) => {
             </button>
         </div>
     );
-}
+};
 
 export default Search;
