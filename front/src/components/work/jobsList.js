@@ -30,20 +30,20 @@ const JobList = ({ jobs = [] }) => {
                         <th>임금</th>
                         <th>임금형태</th>
                         <th>주소</th>
-                        <th>연락처</th>
+                        <th>모집기간</th>
                     </tr>
                 </thead>
                 <tbody>
                     {jobs.map((job, index) => (
                         <tr key={job.연번} onClick={() => handleRowClick(job)} className="job-row">
                             <td style={{ color: '#0066ff' }}>{index + 1}</td>
-                            <td>{job.사업장명}</td>
-                            <td>{job.모집직종}</td>
-                            <td>{job.고용형태}</td>
-                            <td>{job.임금}</td>
-                            <td>{job.임금형태}</td>
-                            <td>{job.사업장주소}</td>
-                            <td>{job.연락처}</td>
+                            <td>{job.busplaName}</td>
+                            <td>{job.jobNm}</td>
+                            <td>{job.empType}</td>
+                            <td>{job.salary}</td>
+                            <td>{job.salaryType}</td>
+                            <td>{job.compAddr}</td>
+                            <td>{job.termDate}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -56,23 +56,23 @@ const JobList = ({ jobs = [] }) => {
 JobList.propTypes = {
     jobs: PropTypes.arrayOf(
         PropTypes.shape({
-            고용형태: PropTypes.string.isRequired,
+            empType: PropTypes.string.isRequired,
             구인신청일자: PropTypes.string.isRequired,
             기업형태: PropTypes.string.isRequired,
-            담당기관: PropTypes.string.isRequired,
-            등록일: PropTypes.string.isRequired,
-            모집기간: PropTypes.string.isRequired,
-            모집직종: PropTypes.string.isRequired,
-            사업장주소: PropTypes.string.isRequired,
-            사업장명: PropTypes.string.isRequired,
-            연락처: PropTypes.string.isRequired,
+            regagnName: PropTypes.string.isRequired,
+            regDt: PropTypes.string.isRequired,
+            termDate: PropTypes.string.isRequired,
+            jobNm: PropTypes.string.isRequired,
+            compAddr: PropTypes.string.isRequired,
+            busplaName: PropTypes.string.isRequired,
+            cntctNo: PropTypes.string.isRequired,
             연번: PropTypes.number.isRequired,
-            요구경력: PropTypes.string.isRequired,
+            reqCareer: PropTypes.string.isRequired,
             요구자격증: PropTypes.string,
-            요구학력: PropTypes.string.isRequired,
-            임금: PropTypes.number.isRequired,
-            임금형태: PropTypes.string.isRequired,
-            입사형태: PropTypes.string.isRequired,
+            reqEduc: PropTypes.string.isRequired,
+            salary: PropTypes.number.isRequired,
+            salaryType: PropTypes.string.isRequired,
+            enterType: PropTypes.string.isRequired,
             전공계열: PropTypes.string
         })
     ).isRequired

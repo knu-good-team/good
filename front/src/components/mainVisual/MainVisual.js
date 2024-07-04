@@ -11,7 +11,7 @@ const MainVisual = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_DEV_URL}/disability/jobs`)
+        fetch(`${process.env.REACT_APP_DEV_URL}/disability/job_list`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

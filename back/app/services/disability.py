@@ -21,7 +21,7 @@ class DisabilityService:
         self,
     ) -> Any:
         settings = get_settings()
-        url = f"http://apis.data.go.kr/B552583/job/job_list_env?serviceKey={settings.OPENDATA_API_KEY}&pageNo=1&numOfRows=10"
+        url = f"http://apis.data.go.kr/B552583/job/job_list_env?serviceKey={settings.OPENDATA_API_KEY}&pageNo=1&numOfRows=1000"
         result = await asyncio.gather(fetch_disability_jobs_list(url))
         return result
 

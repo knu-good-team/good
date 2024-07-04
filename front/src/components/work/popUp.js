@@ -11,7 +11,7 @@ const PopUp = ({ selectedJob, closeModal }) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_DEV_URL}/gps?address=${selectedJob.사업장주소}`)
+        fetch(`${process.env.REACT_APP_DEV_URL}/gps?address=${selectedJob.compAddr}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('response is not ok');
@@ -27,7 +27,7 @@ const PopUp = ({ selectedJob, closeModal }) => {
             .catch(error => {
                 setError(error.message);
             })
-    }, [selectedJob.사업장주소])
+    }, [selectedJob.compAddr])
 
     useEffect(() => {
         if (activeTab === 'facilities' && coordinate[0] !== 0 && coordinate[1] !== 0) {
@@ -45,7 +45,7 @@ const PopUp = ({ selectedJob, closeModal }) => {
             case 'facilities':
                 return <div id="map" className="kakao-map"></div>;
             case 'safety':
-                return <MapComponent address={selectedJob.사업장주소} coordinate={coordinate} />;
+                return <MapComponent address={selectedJob.compAddr} coordinate={coordinate} />;
             case 'preferred':
                 return <Statistics />;
             default:
@@ -65,38 +65,38 @@ const PopUp = ({ selectedJob, closeModal }) => {
                 <span className="close" onClick={closeModal}>&times;</span>
                 <div className="company-info">
                     <div className="company">
-                        <div className="subtitle" style={{ color: "#0066FF" }}>{selectedJob.모집직종}</div>
-                        <div className="title" style={{ color: "#0066FF" }}>{selectedJob.사업장명}</div>
+                        <div className="subtitle" style={{ color: "#0066FF" }}>{selectedJob.jobNm}</div>
+                        <div className="title" style={{ color: "#0066FF" }}>{selectedJob.busplaName}</div>
                     </div>
                     <div className="modal-grid">
                         <div className="modal-column">
                             <h3>기업정보</h3>
                             <div className="modal-row">
                                 <span>사업장명</span>
-                                <span>{selectedJob.사업장명}</span>
+                                <span>{selectedJob.busplaName}</span>
                             </div>
-                            <div className="modal-row">
+                            {/* <div className="modal-row">
                                 <span>연락처</span>
                                 <span>{selectedJob.연락처}</span>
-                            </div>
-                            <div className="modal-row">
+                            </div> */}
+                            {/* <div className="modal-row">
                                 <span>기업형태</span>
                                 <span>{selectedJob.기업형태}</span>
-                            </div>
+                            </div> */}
                             <div className="modal-row">
                                 <span>담당기관</span>
-                                <span>{selectedJob.담당기관}</span>
+                                <span>{selectedJob.regagnName}</span>
                             </div>
                         </div>
                         <div className="modal-column">
                             <h3>지원정보/자격</h3>
                             <div className="modal-row">
                                 <span className="strength">요구경력</span>
-                                <span>{selectedJob.요구경력}</span>
+                                <span>{selectedJob.reqCareer}</span>
                             </div>
                             <div className="modal-row">
                                 <span className="strength">요구학력</span>
-                                <span>{selectedJob.요구학력}</span>
+                                <span>{selectedJob.reqEduc}</span>
                             </div>
                             <div className="modal-row">
                                 <span>전공계열</span>
@@ -107,26 +107,26 @@ const PopUp = ({ selectedJob, closeModal }) => {
                             <h3>근무조건</h3>
                             <div className="modal-row">
                                 <span className="strength">고용형태</span>
-                                <span>{selectedJob.고용형태}</span>
+                                <span>{selectedJob.empType}</span>
                             </div>
                             <div className="modal-row">
                                 <span>임금/급여형태</span>
-                                <span>{selectedJob.임금}/{selectedJob.임금형태}</span>
+                                <span>{selectedJob.salary}/{selectedJob.salaryType}</span>
                             </div>
                             <div className="modal-row">
                                 <span>입사형태</span>
-                                <span>{selectedJob.입사형태}</span>
+                                <span>{selectedJob.enterType}</span>
                             </div>
                             <div className="modal-row">
                                 <span>사업장주소</span>
-                                <span>{selectedJob.사업장주소}</span>
+                                <span>{selectedJob.compAddr}</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="recruitment">
                     <div className="period subtitle">모집기간</div>
-                    <p className="period title">{selectedJob.모집기간}</p>
+                    <p className="period title">{selectedJob.termDate}</p>
                 </div>
                 <div className="tab-container">
                     <button className={`tab-button ${activeTab === 'facilities' ? 'active' : ''}`} onClick={() => setActiveTab('facilities')}>
