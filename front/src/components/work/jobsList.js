@@ -30,7 +30,7 @@ const JobList = ({ jobs = [] }) => {
                         <th>임금</th>
                         <th>임금형태</th>
                         <th>주소</th>
-                        <th>모집기간</th>
+                        <th>남은 기간</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,7 +43,7 @@ const JobList = ({ jobs = [] }) => {
                             <td>{job.salary}</td>
                             <td>{job.salaryType}</td>
                             <td>{job.compAddr}</td>
-                            <td>{job.termDate}</td>
+                            <td>D-{job.termDate.d_day}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -61,7 +61,7 @@ JobList.propTypes = {
             기업형태: PropTypes.string.isRequired,
             regagnName: PropTypes.string.isRequired,
             regDt: PropTypes.string.isRequired,
-            termDate: PropTypes.string.isRequired,
+            termDate: PropTypes.array.isRequired,
             jobNm: PropTypes.string.isRequired,
             compAddr: PropTypes.string.isRequired,
             busplaName: PropTypes.string.isRequired,

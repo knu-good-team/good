@@ -37,12 +37,12 @@ async def disability_jobs(
 async def disaility_jobs_real_tine(
     service: DisabilityService = Depends(get_disability_service),
 ) -> dict[str, Any]:
-    result = await service.get_disability_jobs_real_time()
+    resp, result = await service.get_disability_jobs_real_time()
     return {
-        "data": result[0]["response"]["body"]["items"]["item"],
+        "data": resp,
         "numOfRows": result[0]["response"]["body"]["numOfRows"],
         "pageNo": result[0]["response"]["body"]["pageNo"],
-        "total": result[0]["response"]["body"]["totalCount"],
+        "total": len(resp),
     }
 
 
