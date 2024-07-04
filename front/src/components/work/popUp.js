@@ -65,8 +65,8 @@ const PopUp = ({ selectedJob, closeModal }) => {
                 <span className="close" onClick={closeModal}>&times;</span>
                 <div className="company-info">
                     <div className="company">
-                        <div className="subtitle" style={{ color: "#0066FF" }}>{selectedJob.사업장명}</div>
-                        <div className="title" style={{ color: "#0066FF" }}>{selectedJob.모집직종}</div>
+                        <div className="subtitle" style={{ color: "#0066FF" }}>{selectedJob.모집직종}</div>
+                        <div className="title" style={{ color: "#0066FF" }}>{selectedJob.사업장명}</div>
                     </div>
                     <div className="modal-grid">
                         <div className="modal-column">

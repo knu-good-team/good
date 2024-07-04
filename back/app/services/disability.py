@@ -1,4 +1,6 @@
-from collections import defaultdict
+import asyncio
+import requests
+import xmltodict
 from typing import Any, List
 from sqlalchemy.orm import Session
 
@@ -14,6 +16,14 @@ class DisabilityService:
         resp = await self.disability_repo.get_disability_jobs_list(db)
         resp_list = [resp.to_dict() for resp in resp]
         return resp_list
+
+    async def get_disability_jobs_real_time(
+        self,
+    ) -> Any:
+        settings = get_settings()
+        url = f"http://apis.data.go.kr/B552583/job/job_list_env?serviceKey={settings.OPENDATA_API_KEY}&pageNo=1&numOfRows=10"
+        result = await asyncio.gather(fetch_disability_jobs_list(url))
+        return result
 
     async def search_disability_jobs(self, db: Session, search: str) -> Any:
         resp = await self.disability_repo.search_disability_jobs(db, search)
@@ -51,3 +61,12 @@ class DisabilityService:
                     temp_counts[job] = count
             age_group_job_counts[age_group] = temp_counts
         return age_group_job_counts
+
+
+async def fetch_disability_jobs_list(url) -> Any:
+    res = requests.get(url, verify=False)
+    if res.status_code == 200:
+        json_data = xmltodict.parse(res.text)
+        return json_data
+    else:
+        return None

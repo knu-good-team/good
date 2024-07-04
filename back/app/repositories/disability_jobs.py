@@ -14,7 +14,7 @@ class DisailityRepository:
 
     async def get_disability_jobs_list(db: Session) -> List:
         try:
-            return db.query(DisabilityJobsModel).all()[:13]
+            return db.query(DisabilityJobsModel).all()[:13]  # TODO: 남은 기간을 계산하여 반환해야한다.
         except OperationalError as e:
             raise HTTPException(status_code=500, detail=str(e))
         except Exception as e:
