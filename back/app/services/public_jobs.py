@@ -1,3 +1,4 @@
+import json
 from typing import Any, List
 from sqlalchemy.orm import Session
 
@@ -12,4 +13,9 @@ class PublicJobsService:
     async def get_public_jobs_list(self, db: Session) -> Any:
         result = await self.public_jobs_repo.get_public_jobs_list(db)
         resp_list = [resp.to_dict() for resp in result]
+        for resp in resp_list:
+            for key, value in resp.items():
+                if key == "areaCode":
+                    a = value.replace("'", '"')
+                    resp[key] = json.loads(a)
         return resp_list
