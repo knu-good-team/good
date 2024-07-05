@@ -24,13 +24,14 @@ class PublicJobsService:
         return resp_list
 
     async def get_detail_public_jobs_list(self, idx: int) -> Any:
+        settings = get_settings()
         url = 'http://openapi.mpm.go.kr/openapi/service/RetrievePblinsttEmpmnInfoService/getItem'
         params = {
-            'serviceKey': 'zTwOLXmR0DJchrdft0su31g4x0oyiSQtY9zXDV6BCygqAdZ9GJ+UYtAJTw5XImJ3TIKiaZrthtCwPox2itopmg==',
+            'serviceKey': settings.OPENDATA_API_KEY,
             'idx': idx
         }
 
-        print(idx)
+        print(settings.OPENDATA_API_KEY)
         async with aiohttp.ClientSession() as session:
             async with session.get(url, params=params) as response:
                 if response.status != 200:
@@ -38,7 +39,7 @@ class PublicJobsService:
                 content = await response.text()
         
         root = ET.fromstring(content)
-        
+
         detail_info = []
         for item in root.findall('.//item'):
             detail = {

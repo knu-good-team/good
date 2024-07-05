@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from app.services.public_jobs import PublicJobsService
 from dependencies import get_db, get_public_jobs_service
 
+
 router = APIRouter()
 
 
