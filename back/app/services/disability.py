@@ -1,6 +1,8 @@
-from collections import defaultdict
+import asyncio
+from datetime import datetime
+import requests
+import xmltodict
 from typing import Any, List
-import aiohttp
 from sqlalchemy.orm import Session
 
 from app.core.config import get_settings
@@ -15,6 +17,33 @@ class DisabilityService:
         resp = await self.disability_repo.get_disability_jobs_list(db)
         resp_list = [resp.to_dict() for resp in resp]
         return resp_list
+
+    async def get_disability_jobs_real_time(
+        self,
+    ) -> Any:
+        settings = get_settings()
+        url = f"http://apis.data.go.kr/B552583/job/job_list_env?serviceKey={settings.OPENDATA_API_KEY}&pageNo=1&numOfRows=1000"
+        result = await asyncio.gather(fetch_disability_jobs_list(url))
+        resp = result[0]["response"]["body"]["items"]["item"]
+
+        def transform_and_calculate_d_day(item):
+            if "termDate" in item:
+                start_date, end_date = item["termDate"].split("~")
+                d_day = (datetime.strptime(end_date, "%Y-%m-%d") - datetime.now()).days
+                if d_day >= 1:
+                    item["termDate"] = {
+                        "start_date": start_date,
+                        "end_date": end_date,
+                        "d_day": d_day,
+                    }
+                    return item
+            return None
+        # 'termDate' 변환 및 'd_day' 계산 후 필터링과 정렬
+        filtered_and_sorted_resp = sorted(
+            filter(None, (transform_and_calculate_d_day(item) for item in resp)),
+            key=lambda x: x["termDate"]["d_day"]
+        )
+        return filtered_and_sorted_resp, result
 
     async def search_disability_jobs(self, db: Session, search: str) -> Any:
         resp = await self.disability_repo.search_disability_jobs(db, search)
@@ -52,3 +81,12 @@ class DisabilityService:
                     temp_counts[job] = count
             age_group_job_counts[age_group] = temp_counts
         return age_group_job_counts
+
+
+async def fetch_disability_jobs_list(url) -> Any:
+    res = requests.get(url, verify=False)
+    if res.status_code == 200:
+        json_data = xmltodict.parse(res.text)
+        return json_data
+    else:
+        return None

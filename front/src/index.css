@@ -10,6 +10,10 @@ body,
   --second-color: #f6f8fa;
 }
 
+.strength {
+  color: var(--primary-color);
+}
+
 @font-face {
   font-family: "Pretendard";
   font-weight: 900;

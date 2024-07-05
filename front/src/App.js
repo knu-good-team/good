@@ -1,10 +1,9 @@
 import './App.css';
 import React from 'react';
-import MapComponent from './components/map/map';
 import Logo from './components/logo/logo';
 
 import MainVisual from './components/mainVisual/MainVisual';
-import Statistics from './components/statistics/statistics';
+import Footer from './components/footer/footer';
 
 
 function App() {
@@ -17,13 +16,13 @@ function App() {
         {/* <NavigationBar /> */}
       </header>
 
-      <container>
+      <div>
         <MainVisual />
-      </container>
+      </div>
 
       <footer className="footer">
-        <MapComponent />
-        <Statistics />
+        <Footer />
+        <Logo />
       </footer>
 
     </div>

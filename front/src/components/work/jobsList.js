@@ -1,7 +1,20 @@
+import React, { useState } from 'react';
+import './joblist.css';
 import { PropTypes } from 'prop-types';
+import PopUp from './popUp';
 
-const JobList = ({ jobs = null }) => {
-    if (!jobs || jobs.length === 0) {
+const JobList = ({ jobs = [] }) => {
+    const [selectedJob, setSelectedJob] = useState(null);
+
+    const handleRowClick = (job) => {
+        setSelectedJob(job);
+    };
+
+    const closeModal = () => {
+        setSelectedJob(null);
+    };
+
+    if (jobs.length === 0) {
         return <p>No jobs available.</p>;
     }
 
@@ -10,57 +23,59 @@ const JobList = ({ jobs = null }) => {
             <table className="job-table">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>사업장명</th>
                         <th>모집직종</th>
                         <th>고용형태</th>
                         <th>임금</th>
                         <th>임금형태</th>
                         <th>주소</th>
-                        <th>연락처</th>
+                        <th>남은 기간</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {jobs.map(job => (
-                        <tr key={job.연번}>
-                            <td>{job.사업장명}</td>
-                            <td>{job.모집직종}</td>
-                            <td>{job.고용형태}</td>
-                            <td>{job.임금}</td>
-                            <td>{job.임금형태}</td>
-                            <td>{job.사업장주소}</td>
-                            <td>{job.연락처}</td>
+                    {jobs.map((job, index) => (
+                        <tr key={index} onClick={() => handleRowClick(job)} className="job-row">
+                            <td style={{ color: '#0066ff' }}>{index + 1}</td>
+                            <td>{job.busplaName}</td>
+                            <td>{job.jobNm}</td>
+                            <td>{job.empType}</td>
+                            <td>{job.salary}</td>
+                            <td>{job.salaryType}</td>
+                            <td>{job.compAddr}</td>
+                            <td>D-{job.termDate.d_day}</td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            {selectedJob && <PopUp selectedJob={selectedJob} closeModal={closeModal} />}
         </div>
     );
 };
 
-
 JobList.propTypes = {
     jobs: PropTypes.arrayOf(
         PropTypes.shape({
-            고용형태: PropTypes.string.isRequired,
+            empType: PropTypes.string.isRequired,
             구인신청일자: PropTypes.string.isRequired,
             기업형태: PropTypes.string.isRequired,
-            담당기관: PropTypes.string.isRequired,
-            등록일: PropTypes.string.isRequired,
-            모집기간: PropTypes.string.isRequired,
-            모집직종: PropTypes.string.isRequired,
-            사업장주소: PropTypes.string.isRequired,
-            사업장명: PropTypes.string.isRequired,
-            연락처: PropTypes.string.isRequired,
+            regagnName: PropTypes.string.isRequired,
+            regDt: PropTypes.string.isRequired,
+            termDate: PropTypes.array.isRequired,
+            jobNm: PropTypes.string.isRequired,
+            compAddr: PropTypes.string.isRequired,
+            busplaName: PropTypes.string.isRequired,
+            cntctNo: PropTypes.string.isRequired,
             연번: PropTypes.number.isRequired,
-            요구경력: PropTypes.string.isRequired,
+            reqCareer: PropTypes.string.isRequired,
             요구자격증: PropTypes.string,
-            요구학력: PropTypes.string.isRequired,
-            임금: PropTypes.number.isRequired,
-            임금형태: PropTypes.string.isRequired,
-            입사형태: PropTypes.string.isRequired,
+            reqEduc: PropTypes.string.isRequired,
+            salary: PropTypes.number.isRequired,
+            salaryType: PropTypes.string.isRequired,
+            enterType: PropTypes.string.isRequired,
             전공계열: PropTypes.string
         })
     ).isRequired
 };
 
-export default JobList
+export default JobList;
