@@ -1,6 +1,9 @@
 import json
 from typing import Any, List
+import aiohttp
+from fastapi import requests
 from sqlalchemy.orm import Session
+import xml.etree.ElementTree as ET
 
 from app.core.config import get_settings
 from app.repositories.public_jobs import PublicJobsRepository
@@ -19,3 +22,45 @@ class PublicJobsService:
                     a = value.replace("'", '"')
                     resp[key] = json.loads(a)
         return resp_list
+
+    async def get_detail_public_jobs_list(self, idx: int) -> Any:
+        url = 'http://openapi.mpm.go.kr/openapi/service/RetrievePblinsttEmpmnInfoService/getItem'
+        params = {
+            'serviceKey': 'zTwOLXmR0DJchrdft0su31g4x0oyiSQtY9zXDV6BCygqAdZ9GJ+UYtAJTw5XImJ3TIKiaZrthtCwPox2itopmg==',
+            'idx': idx
+        }
+
+        print(idx)
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, params=params) as response:
+                if response.status != 200:
+                    raise Exception("Failed to fetch data from external API")
+                content = await response.text()
+        
+        root = ET.fromstring(content)
+        
+        detail_info = []
+        for item in root.findall('.//item'):
+            detail = {
+                'areaCode': item.find('areaCode').text,
+                'areaNm': item.find('areaNm').text,
+                'contents': item.find('contents').text,
+                'deptCode': item.find('deptCode').text,
+                'deptName': item.find('deptName').text,
+                'empmnsn': item.find('empmnsn').text,
+                'enddate': item.find('enddate').text,
+                'link01': item.find('link01').text,
+                'moddate': item.find('moddate').text,
+                'readnum': item.find('readnum').text,
+                'regdate': item.find('regdate').text,
+                'title': item.find('title').text,
+                'type01': item.find('type01').text,
+                'type02': item.find('type02').text,
+                'typeinfo02': item.find('typeinfo02').text,
+                'userid': item.find('userid').text,
+                'username': item.find('username').text
+            }
+            detail_info.append(detail)
+        
+        return detail_info
+        

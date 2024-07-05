@@ -9,7 +9,7 @@ router = APIRouter()
 
 
 @router.get(
-    "",
+    "/jobs",
 )
 async def first_get(
     service: PublicJobsService = Depends(get_public_jobs_service),
@@ -19,3 +19,15 @@ async def first_get(
     return {
         "data": result,
     }
+
+@router.get(
+    "/job_detail",
+)
+async def second_get(
+    idx: int = 227097,
+    service: PublicJobsService=Depends(get_public_jobs_service),
+) -> Any:
+    detail_info=await service.get_detail_public_jobs_list(idx)
+    print(idx)
+    return {"data" : detail_info,}
+    

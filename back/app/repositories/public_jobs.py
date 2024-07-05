@@ -3,7 +3,7 @@ from fastapi import HTTPException
 from pymysql import OperationalError
 from sqlalchemy.orm import Session
 
-from app.model.job_posting import PublicJobsModel
+from app.model.public_jobs import PublicJobsModel
 
 
 class PublicJobsRepository:
@@ -18,3 +18,5 @@ class PublicJobsRepository:
             raise HTTPException(status_code=500, detail=str(e))
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+        
+    

@@ -4,25 +4,25 @@ import xml.etree.ElementTree as ET
 import html
 import json
 
-# URL to fetch JSON data
-url = 'http://127.0.0.1:8000/'
+# # URL to fetch JSON data
+# url = 'http://127.0.0.1:8000/'
 
-# Fetch the data
-response = requests.get(url)
-data = response.json()
+# # Fetch the data
+# response = requests.get(url)
+# data = response.json()
 
-# Convert JSON data to DataFrame
-df = pd.DataFrame(data)
+# # Convert JSON data to DataFrame
+# df = pd.DataFrame(data)
 
-# Get the 'idx' value of the first entry
-first_idx_value = int(df.iloc[0]['idx'])
+# # Get the 'idx' value of the first entry
+# first_idx_value = int(df.iloc[0]['idx'])
 
-# Display the 'idx' value
-print(first_idx_value)
+# # Display the 'idx' value
+# print(first_idx_value)
 
 url = 'http://openapi.mpm.go.kr/openapi/service/RetrievePblinsttEmpmnInfoService/getItem'
 params ={'serviceKey' : 'zTwOLXmR0DJchrdft0su31g4x0oyiSQtY9zXDV6BCygqAdZ9GJ+UYtAJTw5XImJ3TIKiaZrthtCwPox2itopmg==',
-          'idx' : first_idx_value }
+          'idx' : 227097 }
 
 response = requests.get(url, params=params)
 
