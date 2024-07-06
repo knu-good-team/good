@@ -3,11 +3,11 @@ import Statistics from '../statistics/statistics';
 import MapComponent from '../map/map';
 import technologistImg from '../../assets/technologist.svg';
 import './popUp.css';
+import CardImage from './cardImage';
 
 const { kakao } = window;
 
 const PopUp = ({ selectedJob, closeModal }) => {
-    console.log(selectedJob)
     const [coordinate, setCoordinate] = useState([0, 0]);
     const [activeTab, setActiveTab] = useState('facilities');
     const [error, setError] = useState(null);
@@ -132,12 +132,13 @@ const PopUp = ({ selectedJob, closeModal }) => {
                 <div className="info">
                     <div className="env-title">작업환경</div>
                     <div className="env-info">
-                        <div>{selectedJob.envBothHands}</div>
+                        <CardImage selectedJob={selectedJob} />
+                        {/* <div>{selectedJob.envBothHands}</div>
                         <div>{selectedJob.envEyesight}</div>
                         <div>{selectedJob.envHandWork}</div>
                         <div>{selectedJob.envLiftPower}</div>
                         <div>{selectedJob.envLstnTalk}</div>
-                        <div>{selectedJob.envStndWalk}</div>
+                        <div>{selectedJob.envStndWalk}</div> */}
                     </div>
                 </div>
                 <div className="period-container">
