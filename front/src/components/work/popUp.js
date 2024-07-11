@@ -6,6 +6,7 @@ import './popUp.css';
 import CardImage from './cardImage';
 
 const { kakao } = window;
+const CATEGORY_CODE = ["CS2", "SW8", "BK9", "CT1", "FD6", "CE7", "HP8", "PM9"]
 
 const PopUp = ({ selectedJob, closeModal }) => {
   const [coordinate, setCoordinate] = useState([0, 0]);
@@ -37,9 +38,29 @@ const PopUp = ({ selectedJob, closeModal }) => {
           level: 3,
         };
         const map = new kakao.maps.Map(container, options);
+        const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png';
+        const imageSize = new kakao.maps.Size(64, 69);
+        const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
         const markerPosition = new kakao.maps.LatLng(coordinate[1], coordinate[0]);
-        const marker = new kakao.maps.Marker({ position: markerPosition });
+        const marker = new kakao.maps.Marker({
+          position: markerPosition,
+          image: markerImage,
+        });
         marker.setMap(map);
+
+        const places = new kakao.maps.services.Places();
+        const callback = function (result, status, pagination) {
+          console.log(result[0].x)
+          console.log(result[0].y)
+          for (let i = 0; i < result.length; i++) {
+            const markerPosition = new kakao.maps.LatLng(result[i].y, result[i].x);
+            const marker = new kakao.maps.Marker({ position: markerPosition });
+            marker.setMap(map);
+          }
+        };
+        places.categorySearch('CE7', callback, {
+          location: new kakao.maps.LatLng(coordinate[1], coordinate[0]),
+        });
       }
     }
   }, [activeTab, coordinate]);
