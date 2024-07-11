@@ -42,3 +42,13 @@
   top: -15px;
   right: 35px;
 }
+
+@media (max-width: 768px) {
+  .check-mark {
+    width: 15px;
+    height: 13px;
+    object-fit: contain;
+    top: -10px;
+    right: 20px;
+  }
+}

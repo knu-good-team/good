@@ -10,7 +10,7 @@ const { kakao } = window;
 const PopUp = ({ selectedJob, closeModal }) => {
   const [coordinate, setCoordinate] = useState([0, 0]);
   const [activeTab, setActiveTab] = useState('facilities');
-  const [category, setCategory] = useState("PM9");  // CS2: 편의점
+  const [category, setCategory] = useState("PM9");  // PM9: 약국
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -64,7 +64,6 @@ const PopUp = ({ selectedJob, closeModal }) => {
   }, [activeTab, coordinate, category]);
 
   const renderMarker = (category) => {
-    console.log(category)
     setCategory(category);
   }
 
@@ -74,10 +73,8 @@ const PopUp = ({ selectedJob, closeModal }) => {
         return (
           <div className="kakao-container">
             <div className="category">
-              <span onClick={() => renderMarker("PM9")}>약국</span>
-              <span onClick={() => renderMarker("HP8")}>병원</span>
-              <span onClick={() => renderMarker("CT1")}>문화시설</span>
-              <span onClick={() => renderMarker("CE7")}>카페</span>
+              <span onClick={() => renderMarker("PM9")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />약국</span>
+              <span onClick={() => renderMarker("CE7")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />카페</span>
             </div>
             <div id="map" className="kakao-map"></div>
           </div>
