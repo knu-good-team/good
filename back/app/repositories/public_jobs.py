@@ -12,11 +12,14 @@ class PublicJobsRepository:
 
     async def get_public_jobs_list(db: Session) -> Any:
         try:
-            result = db.query(PublicJobsModel).limit(10).all()
-            return result
+            result = db.query(PublicJobsModel).limit(200).all()
+            tc = db.query(PublicJobsModel).count()
+            return result, tc
         except OperationalError as e:
             raise HTTPException(status_code=500, detail=str(e))
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
+        
+    
         
     

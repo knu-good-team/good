@@ -25,7 +25,7 @@ async def first_get(
     "/job_detail",
 )
 async def second_get(
-    idx: int = 227097,
+    idx: int = 228140,
     service: PublicJobsService=Depends(get_public_jobs_service),
 ) -> Any:
     detail_info=await service.get_detail_public_jobs_list(idx)
