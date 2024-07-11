@@ -6,11 +6,11 @@ import './popUp.css';
 import CardImage from './cardImage';
 
 const { kakao } = window;
-const CATEGORY_CODE = ["CS2", "SW8", "BK9", "CT1", "FD6", "CE7", "HP8", "PM9"]
 
 const PopUp = ({ selectedJob, closeModal }) => {
   const [coordinate, setCoordinate] = useState([0, 0]);
   const [activeTab, setActiveTab] = useState('facilities');
+  const [category, setCategory] = useState("PM9");  // CS2: 편의점
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -50,25 +50,38 @@ const PopUp = ({ selectedJob, closeModal }) => {
 
         const places = new kakao.maps.services.Places();
         const callback = function (result, status, pagination) {
-          console.log(result[0].x)
-          console.log(result[0].y)
           for (let i = 0; i < result.length; i++) {
             const markerPosition = new kakao.maps.LatLng(result[i].y, result[i].x);
             const marker = new kakao.maps.Marker({ position: markerPosition });
             marker.setMap(map);
           }
         };
-        places.categorySearch('CE7', callback, {
+        places.categorySearch(category, callback, {
           location: new kakao.maps.LatLng(coordinate[1], coordinate[0]),
         });
       }
     }
-  }, [activeTab, coordinate]);
+  }, [activeTab, coordinate, category]);
+
+  const renderMarker = (category) => {
+    console.log(category)
+    setCategory(category);
+  }
 
   const renderContent = () => {
     switch (activeTab) {
       case 'facilities':
-        return <div id="map" className="kakao-map"></div>;
+        return (
+          <div className="kakao-container">
+            <div className="category">
+              <span onClick={() => renderMarker("PM9")}>약국</span>
+              <span onClick={() => renderMarker("HP8")}>병원</span>
+              <span onClick={() => renderMarker("CT1")}>문화시설</span>
+              <span onClick={() => renderMarker("CE7")}>카페</span>
+            </div>
+            <div id="map" className="kakao-map"></div>
+          </div>
+        );
       case 'safety':
         return <MapComponent address={selectedJob.compAddr} coordinate={coordinate} />;
       case 'preferred':
