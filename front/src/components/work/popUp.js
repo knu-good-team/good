@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import Statistics from '../statistics/statistics';
 import MapComponent from '../map/map';
+import technologistImg from '../../assets/technologist.svg';
 import './popUp.css';
+import CardImage from './cardImage';
 
 const { kakao } = window;
 
 const PopUp = ({ selectedJob, closeModal }) => {
-    const [coordinate, setCoordinate] = useState([0, 0]); // [경도 log, 위도 lat]
-    const [activeTab, setActiveTab] = useState('facilities'); // ['facilities', 'safety', 'preferred'
+    const [coordinate, setCoordinate] = useState([0, 0]);
+    const [activeTab, setActiveTab] = useState('facilities');
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -26,19 +28,26 @@ const PopUp = ({ selectedJob, closeModal }) => {
             })
             .catch(error => {
                 setError(error.message);
-            })
-    }, [selectedJob.compAddr])
+            });
+    }, [selectedJob.compAddr]);
 
     useEffect(() => {
         if (activeTab === 'facilities' && coordinate[0] !== 0 && coordinate[1] !== 0) {
             const container = document.getElementById('map');
-            const options = {
-                center: new kakao.maps.LatLng(coordinate[1], coordinate[0]),
-                level: 3
-            };
-            new kakao.maps.Map(container, options);
+            if (container) {
+                const options = {
+                    center: new kakao.maps.LatLng(coordinate[1], coordinate[0]),
+                    level: 3,
+                };
+                const map = new kakao.maps.Map(container, options);
+                let markerPosition = new kakao.maps.LatLng(coordinate[1], coordinate[0]);
+                let marker = new kakao.maps.Marker({
+                    position: markerPosition,
+                });
+                marker.setMap(map);
+            }
         }
-    }, [activeTab, coordinate])
+    }, [activeTab, coordinate]);
 
     const renderContent = () => {
         switch (activeTab) {
@@ -60,14 +69,18 @@ const PopUp = ({ selectedJob, closeModal }) => {
     };
 
     return (
-        <div div className="modal" onClick={handleBackgroundClick}>
+        <div className="modal" onClick={handleBackgroundClick}>
             <div className="modal-content">
-                <span className="close" onClick={closeModal}>&times;</span>
-                <div className="company-info">
-                    <div className="company">
-                        <div className="subtitle" style={{ color: "#0066FF" }}>{selectedJob.jobNm}</div>
-                        <div className="title" style={{ color: "#0066FF" }}>{selectedJob.busplaName}</div>
+                <div className="modal-header">
+                    <span className="close" onClick={closeModal}>&times;</span>
+                    <div className="title-container">
+                        <div className="title">{selectedJob.busplaName}</div>
+                        <div className="subtitle">{selectedJob.jobNm}</div>
                     </div>
+                    <img src={technologistImg} alt="technologist" className="technologist" />
+                </div>
+                <div className="info">
+                    <div className="recruitment-title">채용정보</div>
                     <div className="modal-grid">
                         <div className="modal-column">
                             <h3>기업정보</h3>
@@ -75,14 +88,6 @@ const PopUp = ({ selectedJob, closeModal }) => {
                                 <span>사업장명</span>
                                 <span>{selectedJob.busplaName}</span>
                             </div>
-                            {/* <div className="modal-row">
-                                <span>연락처</span>
-                                <span>{selectedJob.연락처}</span>
-                            </div> */}
-                            {/* <div className="modal-row">
-                                <span>기업형태</span>
-                                <span>{selectedJob.기업형태}</span>
-                            </div> */}
                             <div className="modal-row">
                                 <span>담당기관</span>
                                 <span>{selectedJob.regagnName}</span>
@@ -124,9 +129,28 @@ const PopUp = ({ selectedJob, closeModal }) => {
                         </div>
                     </div>
                 </div>
-                <div className="recruitment">
-                    <div className="period subtitle">모집기간</div>
-                    <p className="period title">{selectedJob.termDate.start_date}~{selectedJob.termDate.end_date}</p>
+                <div className="info">
+                    <div className="env-title">작업환경</div>
+                    <div className="env-info">
+                        <CardImage selectedJob={selectedJob} />
+                        {/* <div>{selectedJob.envBothHands}</div>
+                        <div>{selectedJob.envEyesight}</div>
+                        <div>{selectedJob.envHandWork}</div>
+                        <div>{selectedJob.envLiftPower}</div>
+                        <div>{selectedJob.envLstnTalk}</div>
+                        <div>{selectedJob.envStndWalk}</div> */}
+                    </div>
+                </div>
+                <div className="period-container">
+                    <div className="period">
+                        <div className="subtitle" >모집기간</div>
+                        <div className="title" style={{ fontSize: '25px' }}>{selectedJob.termDate.start_date}<br />~{selectedJob.termDate.end_date}</div>
+                    </div>
+                    <div className="divider" />
+                    <div className="period">
+                        <div className="subtitle">남은기간</div>
+                        <div className="title">D-{selectedJob.termDate.d_day}</div>
+                    </div>
                 </div>
                 <div className="tab-container">
                     <button className={`tab-button ${activeTab === 'facilities' ? 'active' : ''}`} onClick={() => setActiveTab('facilities')}>
@@ -146,7 +170,7 @@ const PopUp = ({ selectedJob, closeModal }) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default PopUp
+export default PopUp;

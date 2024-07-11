@@ -1,0 +1,16 @@
+.job-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 10px 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.job-card h3 {
+  margin: 0 0 10px;
+  color: #0066ff;
+}
+
+.job-card p {
+  margin: 5px 0;
+}
