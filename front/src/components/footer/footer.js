@@ -11,7 +11,7 @@ function Footer() {
                 <div className="info">개인정보처리방침</div>
                 <div className="info">도움말</div>
             </div>
-            <div className="info">@ JOEUNDAE. All rights reserved.</div>
+            <div>@ JOEUNDAE. All rights reserved.</div>
         </div>
     );
 }

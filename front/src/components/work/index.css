@@ -27,3 +27,13 @@
 .work-count {
   color: var(--primary-color);
 }
+
+@media (max-width: 768px) {
+  .work-text {
+    font-size: 12px;
+  }
+
+  .work-count {
+    font-size: 12px;
+  }
+}

@@ -3,6 +3,8 @@
   list-style: none;
   justify-content: center;
   padding: 0;
+  overflow-x: auto; /* 가로 스크롤 가능하게 설정 */
+  white-space: nowrap; /* 줄 바꿈 방지 */
 }
 
 .page-item {
@@ -26,11 +28,17 @@
 .page-item.active .page-link {
   display: flex;
   font-weight: bold;
-  /* text-decoration: underline; */
   justify-content: center;
   align-items: center;
   border: #007bff solid 1px;
   border-radius: 25px;
   width: 30px;
   height: 30px;
+}
+
+@media (max-width: 768px) {
+  .pagination {
+    justify-content: flex-start; /* 모바일에서는 왼쪽 정렬 */
+    padding: 0 10px;
+  }
 }
