@@ -2,16 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './jobCard.css';
 
-const JobCard = ({ job }) => (
-  <div className="job-card">
-    <h3>{job.busplaName}</h3>
-    <p>모집직종: {job.jobNm}</p>
-    <p>고용형태: {job.empType}</p>
-    <p>임금: {job.salary} ({job.salaryType})</p>
-    <p>주소: {job.compAddr}</p>
-    <p>남은 기간: D-{job.termDate.d_day}</p>
-  </div>
-);
+const JobCard = ({ job }) => {
+  return (
+    <div className="job-card">
+      <div className="job-header">
+        <span className="d-day">D-{job.termDate.d_day}</span>
+      </div>
+      <div className="job-body">
+        <h3 className="company-name">{job.busplaName}</h3>
+        <p className="job-title">{job.jobNm}</p>
+        <div className="job-tags">
+          <span># {job.empType}</span>
+          <span># {job.salaryType === '시급' ? '최저시급' : job.salaryType}</span>
+          <span># 경력/학력 {job.reqCareer === '무관' && job.reqEdu === '무관' ? '무관' : `${job.reqCareer}/${job.reqEdu}`}</span>
+        </div>
+      </div>
+      <button className="job-button" onClick={() => console.log("hello world")}>
+        채용정보 보러가기
+      </button>
+    </div>
+  )
+};
 
 JobCard.propTypes = {
   job: PropTypes.object.isRequired,
