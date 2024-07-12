@@ -6,15 +6,15 @@ Base = declarative_base()
 
 class PublicJobsModel(Base):
    __tablename__ = "public_jobs"
-   idx = Column(BIGINT, nullable=False, autoincrement=True, primary_key=True)
-   areaCode = Column(TEXT, nullable=False)
-   deptName = Column(TEXT, nullable=False)
-   enddate = Column(BIGINT, nullable=False)
-   readnum = Column(BIGINT, nullable=False)
-   regdate = Column(BIGINT, nullable=False)
-   title = Column(TEXT, nullable=False)
-   typeinfo02 = Column(TEXT, nullable=False)
-   username = Column(TEXT, nullable=False)
+   idx = Column(BIGINT, nullable=False, primary_key=True)
+   areaCode = Column(TEXT, nullable=True)
+   deptName = Column(TEXT, nullable=True)
+   enddate = Column(BIGINT, nullable=True)
+   readnum = Column(BIGINT, nullable=True)
+   regdate = Column(BIGINT, nullable=True)
+   title = Column(TEXT, nullable=True)
+   typeinfo02 = Column(TEXT, nullable=True)
+   username = Column(TEXT, nullable=True)
 
 
    def to_dict(self):

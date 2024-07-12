@@ -25,7 +25,7 @@ async def first_get(
     "/job_detail",
 )
 async def second_get(
-    idx: int = 228140,
+    idx: int = 226483,                                                  ##임의의 idx값 지정(추후에는 클릭한 취업정보의 idx값을 가져와야함)
     service: PublicJobsService=Depends(get_public_jobs_service),
 ) -> Any:
     detail_info=await service.get_detail_public_jobs_list(idx)
