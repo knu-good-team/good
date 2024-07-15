@@ -46,7 +46,19 @@ class DisabilityService:
         return filtered_and_sorted_resp, result
 
     async def get_disability_convenient_facilities(self) -> Any:
-        return "hello world!"
+        settings = get_settings()
+        faclNm = "용인세브란스병원"
+        # faclNm = "(주)이맥솔루션"
+        disability_convenient_facilities_url = f"http://apis.data.go.kr/B554287/DisabledPersonConvenientFacility/getDisConvFaclList?serviceKey={settings.OPENDATA_API_KEY}&faclNm={faclNm}"
+        result = await asyncio.gather(fetch_disability_jobs_list(disability_convenient_facilities_url))
+
+        if result[0]["facInfoList"]["totalCount"] == "0":
+            return "해당하는 편의시설이 없습니다."
+        else:
+            wfcltId = result[0]["facInfoList"]["servList"]["wfcltId"]
+            disability_convenient_info_list_url = f"http://apis.data.go.kr/B554287/DisabledPersonConvenientFacility/getFacInfoOpenApiJpEvalInfoList?serviceKey={settings.OPENDATA_API_KEY}&wfcltId={wfcltId}"
+            result = await asyncio.gather(fetch_disability_jobs_list(disability_convenient_info_list_url))
+            return result
 
     async def search_disability_jobs(self, db: Session, search: str) -> Any:
         resp = await self.disability_repo.search_disability_jobs(db, search)

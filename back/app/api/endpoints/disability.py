@@ -53,6 +53,7 @@ async def disaility_jobs_real_time(
   response_description="",
 )
 async def disability_convenient_facilities(
+    faclNm: str = None,
     service: DisabilityService = Depends(get_disability_service),
 ) -> dict[str, Any]:
     result = await service.get_disability_convenient_facilities()
