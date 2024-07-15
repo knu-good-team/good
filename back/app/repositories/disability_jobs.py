@@ -8,7 +8,7 @@ from app.model.disability_workers import DisabilityWorkersModel
 from app.schemas.disability_jobs import DisabilityWorkers
 
 
-class DisailityRepository:
+class DisabilityRepository:
     def __init__(self) -> None:
         pass
 

@@ -4,11 +4,11 @@ import aiohttp
 from sqlalchemy.orm import Session
 
 from app.core.config import get_settings
-from app.repositories.disability_jobs import DisailityRepository
+from app.repositories.disability_jobs import DisabilityRepository
 
 
 class DisabilityService:
-    def __init__(self, disability_repo: DisailityRepository) -> None:
+    def __init__(self, disability_repo: DisabilityRepository) -> None:
         self.disability_repo = disability_repo
 
     async def get_disability_jobs_list(self, db: Session) -> Any:
