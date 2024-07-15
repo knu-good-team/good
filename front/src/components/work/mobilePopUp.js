@@ -24,15 +24,15 @@ const MobilePopUp = ({ selectedJob, closeModal }) => {
     switch (activeTab) {
       case 'facilities':
         return (
-          <div className="kakao-container">
-            <div className="category">
-              <span onClick={() => renderMarker("PM9")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />약국</span>
-              <span onClick={() => renderMarker("HP8")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />병원</span>
-              <span onClick={() => renderMarker("CS2")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />편의점</span>
-              <span onClick={() => renderMarker("FD6")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />음식점</span>
-              <span onClick={() => renderMarker("CE7")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />카페</span>
+          <div className="m-kakao-container">
+            <div className="m-category">
+              <span onClick={() => renderMarker("PM9")} className="m-category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />약국</span>
+              <span onClick={() => renderMarker("HP8")} className="m-category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />병원</span>
+              <span onClick={() => renderMarker("CS2")} className="m-category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />편의점</span>
+              <span onClick={() => renderMarker("FD6")} className="m-category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />음식점</span>
+              <span onClick={() => renderMarker("CE7")} className="m-category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />카페</span>
             </div>
-            <div id="map" className="kakao-map"></div>
+            <div id="map" className="m-kakao-map"></div>
           </div>
         );
       case 'safety':
@@ -49,45 +49,45 @@ const MobilePopUp = ({ selectedJob, closeModal }) => {
   };
 
   return (
-    <div className="modal" onClick={handleBackgroundClick}>
-      <div className="modal-content">
-        <div className="modal-header">
-          <span className="close" onClick={closeModal}>&times;</span>
-          <div className="title-container">
-            <div className="title">{selectedJob.busplaName}</div>
-            <div className="subtitle">{selectedJob.jobNm}</div>
+    <div className="m-modal" onClick={handleBackgroundClick}>
+      <div className="m-modal-content">
+        <div className="m-modal-header">
+          <span className="m-close" onClick={closeModal}>&times;</span>
+          <div className="m-title-container">
+            <div className="m-title">{selectedJob.busplaName}</div>
+            <div className="m-subtitle">{selectedJob.jobNm}</div>
           </div>
-          <img src={technologistImg} alt="technologist" className="technologist" />
+          <img src={technologistImg} alt="technologist" className="m-technologist" />
         </div>
-        <div className="info">
-          <div className="modal-grid">
+        <div className="m-info">
+          <div className="m-modal-grid">
             <InfoColumn title="" info={[
               { label: '사업장명', value: selectedJob.busplaName },
               { label: '연락처', value: selectedJob.cntctNo },
               { label: '담당기관', value: selectedJob.regagnName },
             ]} />
           </div>
-          <div className="modal-grid">
+          <div className="m-modal-grid">
             <InfoColumn title="기업정보" info={[
               { label: '사업장명', value: selectedJob.busplaName },
               { label: '담당기관', value: selectedJob.regagnName },
             ]} />
           </div>
         </div>
-        <div className="info">
-          <div className="env-title">작업환경</div>
-          {/* <div className="facility">{data.map((val, idx) => {
+        <div className="m-info">
+          <div className="m-env-title">작업환경</div>
+          {/* <div className="m-facility">{data.map((val, idx) => {
             return (
               <div key={idx}>{val}</div>
             )
           })}</div> */}
-          <div className="env-info">
+          <div className="m-env-info">
             <CardImage selectedJob={selectedJob} />
           </div>
         </div>
         <PeriodInfo termDate={selectedJob.termDate} />
         <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
-        {/* <div className="tab-content">{renderContent()}</div> */}
+        {/* <div className="m-tab-content">{renderContent()}</div> */}
       </div>
     </div>
   )

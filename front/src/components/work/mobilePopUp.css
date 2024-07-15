@@ -1,0 +1,156 @@
+.m-modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.m-modal-content {
+  background-color: rgba(240, 242, 244);
+  margin: 5% auto;
+  border: 1px solid #888;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.m-modal-header {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  padding: 20px;
+  height: 300px;
+  background: linear-gradient(rgba(0, 102, 255, 1), rgba(0, 148, 255, 1));
+  border-radius: 0px 0px 50px 50px;
+  color: white;
+}
+
+.m-title-container {
+  position: relative;
+  top: 25%;
+  margin-left: 30px;
+}
+
+.m-title {
+  font-size: 64px;
+  color: white;
+}
+
+.m-subtitle {
+  font-size: 24px;
+  color: white;
+}
+
+.m-close {
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.m-technologist {
+  width: 150px;
+  height: auto;
+  position: absolute;
+  bottom: -10px;
+  right: 70px;
+}
+
+.m-info {
+  margin: 20px 40px;
+}
+
+.m-env-title {
+  color: rgba(0, 102, 255, 1);
+  font-size: 20px;
+  font-weight: 700;
+  text-align: left;
+  margin: 20px 20px;
+}
+
+.m-env-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 0px;
+}
+
+.m-recruitment-title {
+  position: relative;
+  top: 30px;
+  left: 25px;
+  background-color: rgba(229, 240, 255, 1);
+  border: 2px solid rgba(0, 102, 255, 1);
+  padding: 10px 30px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 20px;
+  color: rgba(0, 102, 255, 1);
+}
+
+.m-modal-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(0, 102, 255, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
+}
+
+.m-recruitment {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--primary-color);
+  padding: 0 60px;
+  height: 130px;
+}
+
+.m-divider {
+  height: 20px;
+  width: 1px;
+  background-color: #ddd;
+  align-self: center;
+  margin: 0 10px;
+}
+
+.m-tab-content {
+  width: auto;
+  height: 100%;
+}
+
+.m-kakao-container {
+  display: flex;
+  flex-direction: row;
+  margin: 20px 0;
+}
+
+.m-kakao-map {
+  width: 100%;
+  height: 600px;
+}
+
+.m-category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+  height: 100%;
+}
+
+.m-category-text {
+  display: flex;
+  flex-direction: row;
+  font-weight: 700;
+  font-size: 14px;
+  margin: 20px 0px;
+}
