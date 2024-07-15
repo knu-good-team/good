@@ -22,8 +22,8 @@ class DisabilityService:
         self,
     ) -> Any:
         settings = get_settings()
-        url = f"http://apis.data.go.kr/B552583/job/job_list_env?serviceKey={settings.OPENDATA_API_KEY}&pageNo=1&numOfRows=1000"
-        result = await asyncio.gather(fetch_disability_jobs_list(url))
+        jobListApiUrl = f"http://apis.data.go.kr/B552583/job/job_list_env?serviceKey={settings.OPENDATA_API_KEY}&pageNo=1&numOfRows=1000"
+        result = await asyncio.gather(fetch_disability_jobs_list(jobListApiUrl))
         resp = result[0]["response"]["body"]["items"]["item"]
 
         def transform_and_calculate_d_day(item):
@@ -44,6 +44,9 @@ class DisabilityService:
             key=lambda x: x["termDate"]["d_day"]
         )
         return filtered_and_sorted_resp, result
+
+    async def get_disability_convenient_facilities(self) -> Any:
+        return "hello world!"
 
     async def search_disability_jobs(self, db: Session, search: str) -> Any:
         resp = await self.disability_repo.search_disability_jobs(db, search)
