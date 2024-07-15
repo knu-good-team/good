@@ -45,7 +45,7 @@ class DisabilityService:
         )
         return filtered_and_sorted_resp, result
 
-    async def get_disability_convenient_facilities(self) -> Any:
+    async def get_disability_convenient_facilities(self, faclNm) -> Any:
         settings = get_settings()
         faclNm = "용인세브란스병원"
         # faclNm = "(주)이맥솔루션"

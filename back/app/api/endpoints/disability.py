@@ -47,19 +47,19 @@ async def disaility_jobs_real_time(
 
 
 @router.get(
-  path="/convenient_facilities",
-  summary="",
-  description="",
-  response_description="",
+    path="/convenient_facilities",
+    summary="",
+    description="",
+    response_description="",
 )
 async def disability_convenient_facilities(
     faclNm: str = None,
     service: DisabilityService = Depends(get_disability_service),
 ) -> dict[str, Any]:
-    result = await service.get_disability_convenient_facilities()
+    result = await service.get_disability_convenient_facilities(faclNm)
     return {
-      "result": result
-    } 
+        "data": result,
+    }
 
 
 @router.get(

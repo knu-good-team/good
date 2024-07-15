@@ -8,10 +8,34 @@ import CardImage from './cardImage';
 const { kakao } = window;
 
 const PopUp = ({ selectedJob, closeModal }) => {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
   const [coordinate, setCoordinate] = useState([0, 0]);
   const [activeTab, setActiveTab] = useState('facilities');
   const [category, setCategory] = useState("PM9");  // PM9: 약국
   const [error, setError] = useState(null);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const response = await fetch(`${process.env.REACT_APP_DEV_URL}/disability/convenient_facilities?falNm=${selectedJob.busplaName}`);
+  //       if (!response.ok) throw new Error('Network response was not ok');
+  //       const result = await response.json();
+  //       if (!result || result.data.length === 0) throw new Error('No data available');
+  //       if (typeof result.data === 'string') {
+  //         setData(result.data);
+  //       } else {
+  //         setData(result.data[0].facInfoList.servList.evalInfo.split(','))
+  //       }
+  //     } catch (error) {
+  //       setError(error.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
     const fetchCoordinates = async () => {
@@ -74,6 +98,9 @@ const PopUp = ({ selectedJob, closeModal }) => {
           <div className="kakao-container">
             <div className="category">
               <span onClick={() => renderMarker("PM9")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />약국</span>
+              <span onClick={() => renderMarker("HP8")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />병원</span>
+              <span onClick={() => renderMarker("CS2")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />편의점</span>
+              <span onClick={() => renderMarker("FD6")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />음식점</span>
               <span onClick={() => renderMarker("CE7")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />카페</span>
             </div>
             <div id="map" className="kakao-map"></div>
@@ -125,6 +152,11 @@ const PopUp = ({ selectedJob, closeModal }) => {
         </div>
         <div className="info">
           <div className="env-title">작업환경</div>
+          {/* <div className="facility">{data.map((val, idx) => {
+            return (
+              <div key={idx}>{val}</div>
+            )
+          })}</div> */}
           <div className="env-info">
             <CardImage selectedJob={selectedJob} />
           </div>
