@@ -39,7 +39,7 @@ class PublicJobsService:
             'serviceKey': settings.OPENDATA_API_KEY,
             'idx': idx
         }
-        print(idx)
+       
         async with aiohttp.ClientSession() as session:                                  ##idx값에 따라 값 가져옴
             async with session.get(url, params=params) as response:
                 if response.status != 200:
@@ -79,6 +79,7 @@ class PublicJobsService:
                 'd_day' : d_day
             }
             detail_info.append(detail)
+            
         
         return detail_info
         
