@@ -25,8 +25,11 @@ class PublicJobsService:
                     a = value.replace("'", '"')
                     resp[key] = json.loads(a)
 
-
-        return resp_list
+        total_count = len(resp_list)
+        return {
+            'total_count': total_count,
+            'details': resp_list
+        }
 
     async def get_detail_public_jobs_list(self, idx: int) -> Any:
         settings = get_settings()
@@ -53,6 +56,7 @@ class PublicJobsService:
             enddate_str = item.find('enddate').text
             enddate = datetime.strptime(enddate_str, "%Y%m%d").date()  # 날짜 형식에 맞게 파싱
             d_day = (enddate - today).days
+
 
             detail = {
                 'areaCode': item.find('areaCode').text,

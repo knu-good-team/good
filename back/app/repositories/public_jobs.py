@@ -12,7 +12,7 @@ class PublicJobsRepository:
 
     async def get_public_jobs_list(db: Session) -> Any:                    ##DB에서 결과값 가져오기
         try:
-            result = db.query(PublicJobsModel).limit(200).all()
+            result = db.query(PublicJobsModel).limit(320).all()
             return result
         except OperationalError as e:
             raise HTTPException(status_code=500, detail=str(e))
