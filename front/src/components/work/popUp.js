@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Statistics from '../statistics/statistics';
 import MapComponent from '../map/map';
 import technologistImg from '../../assets/technologist.svg';
-import './popUp.css';
 import CardImage from './cardImage';
+import TabNavigation from './components/TabNavigation';
+import PeriodInfo from './components/PeriodInfo';
+import InfoColumn from './components/InfoColumn';
+import './popUp.css';
 
 const { kakao } = window;
 
@@ -168,47 +171,5 @@ const PopUp = ({ selectedJob, closeModal }) => {
     </div>
   );
 };
-
-const InfoColumn = ({ title, info }) => (
-  <div className="modal-column">
-    <h3>{title}</h3>
-    {info.map((item, index) => (
-      <div className={`modal-row ${item.className || ''}`} key={index}>
-        <span>{item.label}</span>
-        <span>{item.value}</span>
-      </div>
-    ))}
-  </div>
-);
-
-const PeriodInfo = ({ termDate }) => (
-  <div className="period-container">
-    <div className="period">
-      <div className="subtitle">모집기간</div>
-      <div className="title" style={{ fontSize: '25px' }}>{termDate.start_date}<br />~{termDate.end_date}</div>
-    </div>
-    <div className="divider" />
-    <div className="period">
-      <div className="subtitle">남은기간</div>
-      <div className="title">D-{termDate.d_day}</div>
-    </div>
-  </div>
-);
-
-const TabNavigation = ({ activeTab, setActiveTab }) => (
-  <div className="tab-container">
-    <button className={`tab-button ${activeTab === 'facilities' ? 'active' : ''}`} onClick={() => setActiveTab('facilities')}>
-      주변 편의시설
-    </button>
-    <div className="divider" />
-    <button className={`tab-button ${activeTab === 'safety' ? 'active' : ''}`} onClick={() => setActiveTab('safety')}>
-      안전등급
-    </button>
-    <div className="divider" />
-    <button className={`tab-button ${activeTab === 'preferred' ? 'active' : ''}`} onClick={() => setActiveTab('preferred')}>
-      선호 직군
-    </button>
-  </div>
-);
 
 export default PopUp;

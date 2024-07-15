@@ -105,22 +105,6 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
 }
 
-.modal-column {
-  flex: 1;
-  min-width: 200px;
-}
-
-.modal-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 0;
-}
-
-.modal-row span:first-child {
-  font-weight: bold;
-  margin-right: 10px;
-}
-
 .recruitment {
   display: flex;
   flex-direction: row;
@@ -129,48 +113,6 @@
   background-color: var(--primary-color);
   padding: 0 60px;
   height: 130px;
-}
-
-.period-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  background-color: var(--primary-color);
-  padding: 0 60px;
-  height: 130px;
-}
-
-.period {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-
-.tab-container {
-  display: flex;
-  justify-content: flex-start;
-  margin: 20px 30px;
-}
-
-.tab-button {
-  padding: 10px 20px;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  font-size: 16px;
-  outline: none;
-  transition: color 0.3s;
-}
-
-.tab-button:hover,
-.tab-button.active {
-  font-weight: bold;
-  color: black;
-}
-
-.tab-button:not(:last-child) {
-  margin-right: 20px;
 }
 
 .divider {
