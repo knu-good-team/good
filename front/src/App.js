@@ -17,7 +17,7 @@ function App() {
       </div>
       <footer className="footer">
         <Footer />
-        <Logo />
+        {/* <Logo /> */}
       </footer>
     </div>
   );
