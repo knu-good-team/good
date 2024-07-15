@@ -9,6 +9,20 @@
   padding: 5px 0;
 }
 
+@media (max-width: 768px) {
+  .modal-column {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .modal-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 8px;
+  }
+}
+
 .modal-row span:first-child {
   font-weight: bold;
   margin-right: 10px;

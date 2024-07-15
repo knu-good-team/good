@@ -23,3 +23,9 @@
 .tab-button:not(:last-child) {
   margin-right: 20px;
 }
+
+@media (max-width: 768px) {
+  .tab-button {
+    font-size: 12px;
+  }
+}

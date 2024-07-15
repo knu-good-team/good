@@ -23,11 +23,27 @@
 }
 
 .title {
-  font-size: 64px;
+  font-size: 20px;
+  font-weight: 700;
   color: white;
 }
 
 .subtitle {
-  font-size: 24px;
+  font-size: 36px;
+  font-weight: 500;
   color: white;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 10px;
+    font-weight: 700;
+    color: white;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+  }
 }

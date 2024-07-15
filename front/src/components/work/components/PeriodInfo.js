@@ -5,7 +5,7 @@ const PeriodInfo = ({ termDate }) => (
   <div className="period-container">
     <div className="period">
       <div className="subtitle">모집기간</div>
-      <div className="title" style={{ fontSize: '25px' }}>{termDate.start_date}<br />~{termDate.end_date}</div>
+      <div className="title">{termDate.start_date}<br />~{termDate.end_date}</div>
     </div>
     <div className="divider" />
     <div className="period">

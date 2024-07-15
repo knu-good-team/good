@@ -68,7 +68,7 @@ const MobilePopUp = ({ selectedJob, closeModal }) => {
             ]} />
           </div>
           <div className="m-modal-grid">
-            <InfoColumn title="기업정보" info={[
+            <InfoColumn title="" info={[
               { label: '사업장명', value: selectedJob.busplaName },
               { label: '담당기관', value: selectedJob.regagnName },
             ]} />

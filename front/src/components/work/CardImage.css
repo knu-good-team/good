@@ -1,9 +1,10 @@
 .card-image-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
+  overflow-x: auto; /* 가로 스크롤 가능하게 설정 */
+  gap: 20px;
 }
 
 .card {
@@ -29,4 +30,26 @@
   font-weight: 700;
   color: #0066ff;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  .card-image-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-x: auto; /* 가로 스크롤 가능하게 설정 */
+    gap: 20px;
+  }
+
+  .card-img {
+    width: 60px;
+    height: auto;
+  }
+
+  .card-description {
+    font-size: 5px;
+    font-weight: 700;
+    color: #0066ff;
+  }
 }
