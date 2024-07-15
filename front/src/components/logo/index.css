@@ -2,3 +2,14 @@
     display: flex;
     margin-left: 60px;
 }
+
+@media (max-width: 768px) {
+    .logo {
+        margin-left: 20px;
+        align-items: flex-start;
+    }
+
+    .logo img {
+        width: 120px;
+    }
+}

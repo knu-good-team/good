@@ -29,6 +29,40 @@ async def disability_jobs(
 
 
 @router.get(
+    path="/job_list",
+    summary="",
+    description="",
+    response_description="",
+)
+async def disaility_jobs_real_time(
+    service: DisabilityService = Depends(get_disability_service),
+) -> dict[str, Any]:
+    resp, result = await service.get_disability_jobs_real_time()
+    return {
+        "data": resp,
+        "numOfRows": result[0]["response"]["body"]["numOfRows"],
+        "pageNo": result[0]["response"]["body"]["pageNo"],
+        "total": len(resp),
+    }
+
+
+@router.get(
+    path="/convenient_facilities",
+    summary="",
+    description="",
+    response_description="",
+)
+async def disability_convenient_facilities(
+    faclNm: str = None,
+    service: DisabilityService = Depends(get_disability_service),
+) -> dict[str, Any]:
+    result = await service.get_disability_convenient_facilities(faclNm)
+    return {
+        "data": result,
+    }
+
+
+@router.get(
     path="/search",
     summary="",
     description="",

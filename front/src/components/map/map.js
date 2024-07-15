@@ -11,32 +11,10 @@ import { createLegendControl } from './createLegend';
 import './index.css'
 
 
-const MapComponent = () => {
+const MapComponent = ({ address = "", coordinate = [0, 0] }) => {
     const mapRef = useRef(null);
-    const [latitude, setLatitude] = useState(126.9783882);
-    const [longitude, setLongitude] = useState(37.5666103);
     const [error, setError] = useState(null);
     const [map, setMap] = useState(null);
-
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_DEV_URL}/gps`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('response is not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (!data || data.length === 0) {
-                    throw new Error('No data available');
-                }
-                setLatitude(data.latitude);
-                setLongitude(data.longitude);
-            })
-            .catch(error => {
-                setError(error.message);
-            })
-    })
 
     useEffect(() => {
         const param = {
@@ -70,7 +48,7 @@ const MapComponent = () => {
                 wmsLayer
             ],
             view: new View({
-                center: fromLonLat([longitude, latitude]), // 서울의 경도 및 위도
+                center: fromLonLat([coordinate[0], coordinate[1]]), // 서울의 경도 및 위도
                 zoom: 16, // 초기 줌 레벨을 더 높임
                 minZoom: 10, // 최소 줌 레벨 설정
                 maxZoom: 18  // 최대 줌 레벨 설정
@@ -85,13 +63,13 @@ const MapComponent = () => {
                 initialMap.setTarget(null);
             }
         };
-    }, []);
+    }, [coordinate]);
 
     useEffect(() => {
         if (map) {
-            map.getView().setCenter(fromLonLat([longitude, latitude]));
+            map.getView().setCenter(fromLonLat([coordinate[0], coordinate[1]]));
         }
-    }, [latitude, longitude, map]);
+    }, [coordinate, map]);
 
     return (
         <div ref={mapRef} className='map' />
