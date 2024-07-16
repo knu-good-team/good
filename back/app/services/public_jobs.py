@@ -17,18 +17,35 @@ class PublicJobsService:
         self.public_jobs_repo = public_jobs_repo
 
     async def get_public_jobs_list(self, db: Session) -> Any:
+        now = datetime.now()  # 날짜 지정
+        today = now.date()
+        
         result = await self.public_jobs_repo.get_public_jobs_list(db)
         resp_list = [resp.to_dict() for resp in result]
+        
+        filtered_resp_list = []  # List to hold the filtered responses
+
         for resp in resp_list:
+            enddate_str = resp.get('enddate')  # enddate 키 값으로 가져오기
+            if enddate_str:
+                enddate_str = str(enddate_str)  # str로 만들기
+                enddate = datetime.strptime(enddate_str, "%Y%m%d").date()  # 날짜 형식에 맞게 파싱
+                d_day = (enddate - today).days
+                if d_day < 0:
+                    continue  # Skip this entry if d_day is less than 0
+                resp['d_day'] = d_day
+
             for key, value in resp.items():
                 if key == "areaCode":
                     a = value.replace("'", '"')
                     resp[key] = json.loads(a)
-
-        total_count = len(resp_list)
+            
+            filtered_resp_list.append(resp)  # Add to the filtered list if it passes the check
+                    
+        total_count = len(filtered_resp_list)
         return {
             'total_count': total_count,
-            'details': resp_list
+            'details': filtered_resp_list
         }
 
     async def get_detail_public_jobs_list(self, idx: int) -> Any:
@@ -48,16 +65,13 @@ class PublicJobsService:
         
         root = ET.fromstring(content)
         
-        now = datetime.now() ##날짜 지정
-        today = now.date()
+        
         
         detail_info = []
         for item in root.findall('.//item'):
             enddate_str = item.find('enddate').text
             enddate = datetime.strptime(enddate_str, "%Y%m%d").date()  # 날짜 형식에 맞게 파싱
-            d_day = (enddate - today).days
-
-
+            
             detail = {
                 'areaCode': item.find('areaCode').text,
                 'areaNm': item.find('areaNm').text if item.find('areaNm') is not None else '',
@@ -76,7 +90,7 @@ class PublicJobsService:
                 'typeinfo02': item.find('typeinfo02').text if item.find('typeinfo02') is not None else '',
                 'userid': item.find('userid').text if item.find('userid') is not None else '',
                 'username': item.find('username').text if item.find('username') is not None else '',
-                'd_day' : d_day
+                
             }
             detail_info.append(detail)
             
