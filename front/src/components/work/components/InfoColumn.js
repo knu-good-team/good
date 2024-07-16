@@ -3,7 +3,7 @@ import './InfoColumn.css';
 
 const InfoColumn = ({ title, info }) => (
   <div className="modal-column">
-    <h3>{title}</h3>
+    <div className="modal-title">{title}</div>
     {info.map((item, index) => (
       <div className={`modal-row ${item.className || ''}`} key={index}>
         <span>{item.label}</span>

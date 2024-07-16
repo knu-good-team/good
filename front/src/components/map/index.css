@@ -2,6 +2,11 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  margin-right: 20px;
   height: 600px;
+}
+
+@media (max-width: 768px) {
+  .map {
+    height: 300px;
+  }
 }

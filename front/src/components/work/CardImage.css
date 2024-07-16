@@ -39,7 +39,7 @@
     justify-content: flex-start;
     align-items: center;
     overflow-x: auto; /* 가로 스크롤 가능하게 설정 */
-    gap: 20px;
+    gap: 10px;
   }
 
   .card-img {
@@ -48,7 +48,7 @@
   }
 
   .card-description {
-    font-size: 5px;
+    font-size: 10px;
     font-weight: 700;
     color: #0066ff;
   }

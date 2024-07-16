@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState} from 'react';
 import Statistics from '../statistics/statistics';
 import MapComponent from '../map/map';
 import technologistImg from '../../assets/technologist.svg';
@@ -7,14 +7,66 @@ import PeriodInfo from './components/PeriodInfo';
 import TabNavigation from './components/TabNavigation';
 import './mobilePopUp.css';
 import InfoColumn from './components/InfoColumn';
+import InfoNavigation from './components/InfoNavigation';
+
+const { kakao } = window;
 
 const MobilePopUp = ({ selectedJob, closeModal }) => {
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
   const [coordinate, setCoordinate] = useState([0, 0]);
   const [activeTab, setActiveTab] = useState('facilities');
+  const [infoTab, setInfoTab] = useState('companyInfo');
   const [category, setCategory] = useState("PM9");  // PM9: 약국
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCoordinates = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_DEV_URL}/gps?address=${selectedJob.compAddr}`);
+        if (!response.ok) throw new Error('response is not ok');
+        const data = await response.json();
+        if (!data || data.length === 0) throw new Error('No data available');
+        setCoordinate([data.longitude, data.latitude]);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchCoordinates();
+  }, [selectedJob.compAddr]);
+
+  useEffect(() => {
+    if (activeTab === 'facilities' && coordinate[0] && coordinate[1]) {
+      const container = document.getElementById('map');
+      if (container) {
+        const options = {
+          center: new kakao.maps.LatLng(coordinate[1], coordinate[0]),
+          level: 3,
+        };
+        const map = new kakao.maps.Map(container, options);
+        const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png';
+        const imageSize = new kakao.maps.Size(64, 69);
+        const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+        const markerPosition = new kakao.maps.LatLng(coordinate[1], coordinate[0]);
+        const marker = new kakao.maps.Marker({
+          position: markerPosition,
+          image: markerImage,
+        });
+        marker.setMap(map);
+
+        const places = new kakao.maps.services.Places();
+        const callback = function (result, status, pagination) {
+          for (let i = 0; i < result.length; i++) {
+            const markerPosition = new kakao.maps.LatLng(result[i].y, result[i].x);
+            const marker = new kakao.maps.Marker({ position: markerPosition });
+            marker.setMap(map);
+          }
+        };
+        places.categorySearch(category, callback, {
+          location: new kakao.maps.LatLng(coordinate[1], coordinate[0]),
+        });
+      }
+    }
+  }, [activeTab, coordinate, category]);
 
   const renderMarker = (category) => {
     setCategory(category);
@@ -44,6 +96,43 @@ const MobilePopUp = ({ selectedJob, closeModal }) => {
     }
   };
 
+  const renderCompanyInfo = () => {
+    switch (infoTab) {
+      case 'companyInfo':
+        return (
+          <div className="m-info" style={{ display: "flex", flexDirection: "row", justifyContent: 'space-around' }}>
+            <div className="m-modal-grid">
+              <InfoColumn title="" info={[
+                { label: '사업장명', value: selectedJob.busplaName },
+                { label: '연락처', value: selectedJob.cntctNo },
+                { label: '담당기관', value: selectedJob.regagnName.split(" ")[1] },
+              ]} />
+            </div>
+            <div className="m-modal-grid">
+              <InfoColumn title="" info={[]} />
+            </div>
+          </div>
+        )
+      case 'employeeInfo':
+        return (
+          <div className="m-info" style={{ display: "flex", flexDirection: "row", justifyContent: 'center' }}>
+            <div className="m-modal-grid">
+              <InfoColumn title="지원정보/자격" info={[
+                { label: '요구경력', value: selectedJob.reqCareer },
+                { label: '요구학력', value: selectedJob.reqEduc },
+                { label: '전공계열', value: selectedJob.enterType },
+                { label: '고용형태', value: selectedJob.empType },
+                { label: '임금/임금형태', value: selectedJob.salaryType },
+                { label: '사업장주소', value: selectedJob.compAddr },
+              ]} />
+            </div>
+          </div>
+        )
+      default:
+        return null;
+    }
+  }
+
   const handleBackgroundClick = (event) => {
     if (event.target.className === 'modal') closeModal();
   };
@@ -59,21 +148,8 @@ const MobilePopUp = ({ selectedJob, closeModal }) => {
           </div>
           <img src={technologistImg} alt="technologist" className="m-technologist" />
         </div>
-        <div className="m-info">
-          <div className="m-modal-grid">
-            <InfoColumn title="" info={[
-              { label: '사업장명', value: selectedJob.busplaName },
-              { label: '연락처', value: selectedJob.cntctNo },
-              { label: '담당기관', value: selectedJob.regagnName },
-            ]} />
-          </div>
-          <div className="m-modal-grid">
-            <InfoColumn title="" info={[
-              { label: '사업장명', value: selectedJob.busplaName },
-              { label: '담당기관', value: selectedJob.regagnName },
-            ]} />
-          </div>
-        </div>
+        <InfoNavigation infoTab={infoTab} setInfoTab={setInfoTab} />
+        <div className="m-tab-content">{renderCompanyInfo()}</div>
         <div className="m-info">
           <div className="m-env-title">작업환경</div>
           {/* <div className="m-facility">{data.map((val, idx) => {
@@ -87,7 +163,7 @@ const MobilePopUp = ({ selectedJob, closeModal }) => {
         </div>
         <PeriodInfo termDate={selectedJob.termDate} />
         <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
-        {/* <div className="m-tab-content">{renderContent()}</div> */}
+        <div className="m-tab-content">{renderContent()}</div>
       </div>
     </div>
   )

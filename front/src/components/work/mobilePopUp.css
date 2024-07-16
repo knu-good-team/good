@@ -14,7 +14,7 @@
   background-color: rgba(240, 242, 244);
   margin: 5% auto;
   border: 1px solid #888;
-  width: 80%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -25,7 +25,7 @@
   position: relative;
   flex-direction: column;
   padding: 20px;
-  height: 300px;
+  height: 150px;
   background: linear-gradient(rgba(0, 102, 255, 1), rgba(0, 148, 255, 1));
   border-radius: 0px 0px 50px 50px;
   color: white;
@@ -33,7 +33,7 @@
 
 .m-title-container {
   position: relative;
-  top: 25%;
+  top: 50%;
   margin-left: 30px;
 }
 
@@ -60,11 +60,11 @@
   height: auto;
   position: absolute;
   bottom: -7px;
-  right: 70px;
+  right: 40px;
 }
 
 .m-info {
-  margin: 20px 40px;
+  margin: 10px;
 }
 
 .m-env-title {
@@ -72,6 +72,7 @@
   font-size: 12px;
   font-weight: 700;
   text-align: left;
+  padding: 10px 20px;
 }
 
 .m-env-info {
@@ -131,8 +132,7 @@
 
 .m-kakao-container {
   display: flex;
-  flex-direction: row;
-  margin: 20px 0;
+  flex-direction: column;
 }
 
 .m-kakao-map {
@@ -142,9 +142,10 @@
 
 .m-category {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  width: 200px;
+  justify-content: space-evenly;
+  width: 100%;
   height: 100%;
 }
 
