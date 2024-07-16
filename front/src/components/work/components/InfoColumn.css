@@ -1,0 +1,40 @@
+.modal-column {
+  flex: 1;
+  min-width: 200px;
+}
+
+.modal-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+.modal-row span:first-child {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 5px 0px;
+}
+
+@media (max-width: 768px) {
+  .modal-column {
+    flex: 1;
+    min-width: 100px;
+  }
+
+  .modal-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 8px;
+  }
+
+  .modal-title {
+    font-size: 8px;
+    font-weight: 800;
+  }
+}
