@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import Statistics from '../statistics/statistics';
 import MapComponent from '../map/map';
-import technologistImg from '../../assets/technologist.svg';
+import technologistImg from '../../assets/technologist.png';
 import CardImage from './cardImage';
 import PeriodInfo from './components/PeriodInfo';
 import TabNavigation from './components/TabNavigation';

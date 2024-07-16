@@ -1,10 +1,10 @@
 import React from 'react';
-import LiftPower from '../../assets/envWork/lift_power.svg';
-import EyeSightImg from '../../assets/envWork/eye.svg';
-import HandWorkImg from '../../assets/envWork/gesturing.svg';
-import BothHandsImg from '../../assets/envWork/palms.svg';
-import StndWalkImg from '../../assets/envWork/walking.svg';
-import LstTalkImg from '../../assets/envWork/lstn_talk.svg';
+import LiftPower from '../../assets/envWork/lift_power.png';
+import EyeSightImg from '../../assets/envWork/eye.png';
+import HandWorkImg from '../../assets/envWork/gesturing.png';
+import BothHandsImg from '../../assets/envWork/palms.png';
+import StndWalkImg from '../../assets/envWork/walking.png';
+import LstTalkImg from '../../assets/envWork/lstn_talk.png';
 import './CardImage.css';
 
 const CardImage = ({ selectedJob }) => {

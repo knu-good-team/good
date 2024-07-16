@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import magnifierIcon from '../../assets/magnifier.svg';
+import magnifierIcon from '../../assets/magnifier.png';
 
 const Search = ({ setSearchText, handleSearch, searchText }) => {
 

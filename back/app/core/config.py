@@ -22,7 +22,7 @@ class Settings:
     PW = os.environ["LOCAL_PW"]
     USER = os.environ["LOCAL_USER"]
     DB_NAME = os.environ["LOCAL_DB_NAME"]
-    OPENDATA_API_KEY = os.environ["OPEN_API_KEY"]
+    OPENDATA_API_KEY = os.environ["OPENDATA_API_KEY"]
    # KAKAO_API_KEY = os.environ["KAKAO_API_KEY"]
 
 
