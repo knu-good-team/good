@@ -105,6 +105,7 @@ const PopUp = ({ selectedJob, closeModal }) => {
               <span onClick={() => renderMarker("CS2")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />편의점</span>
               <span onClick={() => renderMarker("FD6")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />음식점</span>
               <span onClick={() => renderMarker("CE7")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />카페</span>
+              <span onClick={() => renderMarker("AT4")} className="m-category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />관광명소</span>
             </div>
             <div id="map" className="kakao-map"></div>
           </div>
@@ -161,7 +162,7 @@ const PopUp = ({ selectedJob, closeModal }) => {
             )
           })}</div> */}
           <div className="env-info">
-            <CardImage selectedJob={selectedJob} />
+            <CardImage selectedJob={selectedJob} convenient={"hello world!"} />
           </div>
         </div>
         <PeriodInfo termDate={selectedJob.termDate} />

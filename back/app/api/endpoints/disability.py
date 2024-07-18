@@ -56,9 +56,9 @@ async def disability_convenient_facilities(
     faclNm: str = None,
     service: DisabilityService = Depends(get_disability_service),
 ) -> dict[str, Any]:
-    result = await service.get_disability_convenient_facilities(faclNm)
+    # result = await service.get_disability_convenient_facilities(faclNm)
     return {
-        "data": result,
+        "data": "hello world!",
     }
 
 

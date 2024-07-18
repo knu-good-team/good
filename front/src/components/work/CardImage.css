@@ -10,12 +10,14 @@
 .card {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   background: linear-gradient(180deg, #ffffff 0%, #e5f0ff 100%);
   border: 1px solid rgba(0, 102, 255, 0.1);
   border-radius: 10px;
   padding: 20px;
   width: 150px;
+  height: 200px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.03);
 }
 
@@ -25,6 +27,14 @@
 }
 
 .card-description {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0066ff;
+  text-align: center;
+}
+
+.card-convience {
   margin-top: 10px;
   font-size: 14px;
   font-weight: 700;
@@ -42,12 +52,23 @@
     gap: 10px;
   }
 
+  .card {
+    width: 150px;
+    height: 100px;
+  }
+
   .card-img {
     width: 60px;
     height: auto;
   }
 
   .card-description {
+    font-size: 10px;
+    font-weight: 700;
+    color: #0066ff;
+  }
+
+  .card-convience {
     font-size: 10px;
     font-weight: 700;
     color: #0066ff;

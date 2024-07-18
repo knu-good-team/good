@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Statistics from '../statistics/statistics';
 import MapComponent from '../map/map';
 import technologistImg from '../../assets/technologist.png';
@@ -83,6 +83,7 @@ const MobilePopUp = ({ selectedJob, closeModal }) => {
               <span onClick={() => renderMarker("CS2")} className="m-category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />편의점</span>
               <span onClick={() => renderMarker("FD6")} className="m-category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />음식점</span>
               <span onClick={() => renderMarker("CE7")} className="m-category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />카페</span>
+              <span onClick={() => renderMarker("AT4")} className="m-category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />관광명소</span>
             </div>
             <div id="map" className="m-kakao-map"></div>
           </div>
