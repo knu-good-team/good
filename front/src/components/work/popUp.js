@@ -37,13 +37,13 @@ const PopUp = ({ selectedJob, closeModal }) => {
   //       setLoading(false);
   //     }
   //   };
-  //   fetchData();
+  //   fetchData()
   // }, []);
 
   useEffect(() => {
     const fetchCoordinates = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_DEV_URL}/gps?address=${selectedJob.compAddr}`);
+        const response = await fetch(`${process.env.REACT_APP_URL}/gps?address=${selectedJob.compAddr}`);
         if (!response.ok) throw new Error('response is not ok');
         const data = await response.json();
         if (!data || data.length === 0) throw new Error('No data available');
@@ -100,12 +100,12 @@ const PopUp = ({ selectedJob, closeModal }) => {
         return (
           <div className="kakao-container">
             <div className="category">
-              <span onClick={() => renderMarker("PM9")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />약국</span>
-              <span onClick={() => renderMarker("HP8")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />병원</span>
-              <span onClick={() => renderMarker("CS2")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />편의점</span>
-              <span onClick={() => renderMarker("FD6")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />음식점</span>
-              <span onClick={() => renderMarker("CE7")} className="category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />카페</span>
-              <span onClick={() => renderMarker("AT4")} className="m-category-text"><div style={{ backgroundColor: "black", width: "20px", height: "20px" }} />관광명소</span>
+              <span onClick={() => renderMarker("PM9")} className="category-text">약국</span>
+              <span onClick={() => renderMarker("HP8")} className="category-text">병원</span>
+              <span onClick={() => renderMarker("CS2")} className="category-text">편의점</span>
+              <span onClick={() => renderMarker("FD6")} className="category-text">음식점</span>
+              <span onClick={() => renderMarker("CE7")} className="category-text">카페</span>
+              <span onClick={() => renderMarker("AT4")} className="m-category-text">관광명소</span>
             </div>
             <div id="map" className="kakao-map"></div>
           </div>

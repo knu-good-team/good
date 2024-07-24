@@ -18,7 +18,7 @@ const MainVisual = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`${process.env.REACT_APP_DEV_URL}/disability/job_list`);
+        const response = await fetch(`${process.env.REACT_APP_URL}/disability/job_list`);
         if (!response.ok) throw new Error('Network response was not ok');
         const result = await response.json();
         if (!result || result.data.length === 0) throw new Error('No data available');
